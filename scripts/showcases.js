@@ -43,31 +43,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const projectData = {
         1: {
             title: 'Sustainable Tech Startup',
-            categories: ['UX', 'Branding'],
+            categories: ['Branding', 'Webdesign'],
             image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            description: 'Komplette Markenidentität und UX-Strategie für ein nachhaltiges Technologie-Startup. Von der Konzeption bis zur digitalen Umsetzung.',
+            description: 'Komplette Markenidentität und Webauftritt für ein nachhaltiges Technologie-Startup. Von der Konzeption bis zur digitalen Umsetzung.',
             details: `
                 <h2>Sustainable Tech Startup</h2>
                 <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sustainable Tech Startup" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-                    <span class="category">UX</span>
                     <span class="category">Branding</span>
+                    <span class="category">Webdesign</span>
                 </div>
                 
                 <h3>Herausforderung</h3>
-                <p>Ein innovatives Startup im Bereich nachhaltiger Technologien benötigte eine komplette Markenidentität und digitale Präsenz, um sich in einem umkämpften Markt zu positionieren.</p>
+                <p>Ein innovatives Startup im Bereich nachhaltiger Technologien benötigte eine komplette Markenidentität und professionelle Website, um sich in einem umkämpften Markt zu positionieren.</p>
                 
                 <h3>Lösung</h3>
-                <p>Entwicklung einer authentischen Markenidentität, die Nachhaltigkeit und Innovation vereint. Gestaltung einer intuitiven Website mit klarer Informationsarchitektur und optimierter User Experience.</p>
+                <p>Entwicklung einer authentischen Markenidentität, die Nachhaltigkeit und Innovation vereint. Gestaltung einer responsiven Website mit klarer Struktur und modernem Design.</p>
                 
                 <h3>Ergebnis</h3>
-                <p>Eine starke Markenidentität, die das Vertrauen der Zielgruppe gewinnt und eine Website, die Conversion-Raten um 40% steigerte.</p>
+                <p>Eine starke Markenidentität, die das Vertrauen der Zielgruppe gewinnt und eine professionelle Website, die neue Kunden erfolgreich akquiriert.</p>
                 
                 <h3>Services</h3>
                 <ul>
                     <li>Markenidentität & Logo-Design</li>
-                    <li>UX/UI Design</li>
+                    <li>Responsive Webdesign</li>
                     <li>Website-Entwicklung</li>
                     <li>Content-Strategie</li>
                 </ul>
@@ -75,159 +75,165 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         2: {
             title: 'E-Commerce Platform',
-            categories: ['Webdesign', 'UX'],
+            categories: ['Webdesign', 'Online Marketing'],
             image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            description: 'Redesign einer E-Commerce-Plattform mit Fokus auf Conversion-Optimierung und intuitive Nutzererfahrung.',
+            description: 'Redesign einer E-Commerce-Plattform mit Fokus auf Conversion-Optimierung und Online-Marketing-Integration.',
             details: `
                 <h2>E-Commerce Platform</h2>
                 <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="E-Commerce Platform" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
                     <span class="category">Webdesign</span>
-                    <span class="category">UX</span>
+                    <span class="category">Online Marketing</span>
                 </div>
                 
                 <h3>Herausforderung</h3>
-                <p>Eine etablierte E-Commerce-Plattform hatte niedrige Conversion-Raten und hohe Abbruchquoten im Checkout-Prozess.</p>
+                <p>Eine etablierte E-Commerce-Plattform hatte niedrige Conversion-Raten und benötigte eine bessere Integration von Marketing-Tools.</p>
                 
                 <h3>Lösung</h3>
-                <p>Komplettes UX-Audit und Redesign mit Fokus auf vereinfachte Navigation, optimierten Checkout-Prozess und mobile-first Ansatz.</p>
+                <p>Komplettes Redesign mit Fokus auf vereinfachte Navigation, optimierten Checkout-Prozess und Integration von Marketing-Automation.</p>
                 
                 <h3>Ergebnis</h3>
-                <p>Steigerung der Conversion-Rate um 65% und Reduzierung der Checkout-Abbrüche um 45%.</p>
+                <p>Steigerung der Conversion-Rate um 65% und erfolgreiche Integration von E-Mail-Marketing und Retargeting-Kampagnen.</p>
                 
                 <h3>Services</h3>
                 <ul>
-                    <li>UX-Audit & Research</li>
-                    <li>Wireframing & Prototyping</li>
-                    <li>UI Design</li>
-                    <li>A/B Testing</li>
+                    <li>E-Commerce Webdesign</li>
+                    <li>Conversion-Optimierung</li>
+                    <li>Marketing-Automation Setup</li>
+                    <li>Performance-Tracking</li>
                 </ul>
             `
         },
         3: {
             title: 'Organic Food Brand',
-            categories: ['Branding'],
+            categories: ['Branding', 'Printdesign'],
             image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            description: 'Entwicklung einer authentischen Markenidentität für einen Bio-Lebensmittelhersteller mit regionalem Fokus.',
+            description: 'Entwicklung einer authentischen Markenidentität und Printmaterialien für einen Bio-Lebensmittelhersteller mit regionalem Fokus.',
             details: `
                 <h2>Organic Food Brand</h2>
                 <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Organic Food Brand" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
                     <span class="category">Branding</span>
+                    <span class="category">Printdesign</span>
                 </div>
                 
                 <h3>Herausforderung</h3>
-                <p>Ein regionaler Bio-Lebensmittelhersteller wollte seine Marke modernisieren und gleichzeitig die Authentizität und Tradition bewahren.</p>
+                <p>Ein regionaler Bio-Lebensmittelhersteller wollte seine Marke modernisieren und benötigte professionelle Printmaterialien für den Vertrieb.</p>
                 
                 <h3>Lösung</h3>
-                <p>Entwicklung einer warmen, natürlichen Markenidentität, die Tradition und Moderne verbindet. Fokus auf Storytelling und regionale Verbundenheit.</p>
+                <p>Entwicklung einer warmen, natürlichen Markenidentität mit umfassendem Printdesign-Paket: Verpackungen, Broschüren, Flyer und Verkaufsmaterialien.</p>
                 
                 <h3>Ergebnis</h3>
-                <p>Eine starke Markenidentität, die die Wiedererkennung um 80% steigerte und neue Zielgruppen erschloss.</p>
+                <p>Eine starke Markenidentität mit professionellen Printmaterialien, die die Wiedererkennung um 80% steigerte und neue Vertriebskanäle erschloss.</p>
                 
                 <h3>Services</h3>
                 <ul>
                     <li>Brand Strategy</li>
                     <li>Logo & Visual Identity</li>
                     <li>Packaging Design</li>
-                    <li>Brand Guidelines</li>
+                    <li>Broschüren & Flyer</li>
+                    <li>Verkaufsmaterialien</li>
                 </ul>
             `
         },
         4: {
-            title: 'Healthcare App',
-            categories: ['UX', 'Webdesign'],
+            title: 'Digital Marketing Campaign',
+            categories: ['Online Marketing', 'Webdesign'],
             image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            description: 'UX-Design für eine Gesundheits-App mit komplexen Datenvisualisierungen und barrierefreier Bedienung.',
+            description: 'Umfassende Online-Marketing-Kampagne mit Landing Pages, Social Media Content und SEO-optimierten Visuals.',
             details: `
-                <h2>Healthcare App</h2>
+                <h2>Digital Marketing Campaign</h2>
                 <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Healthcare App" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-                    <span class="category">UX</span>
+                    <span class="category">Online Marketing</span>
                     <span class="category">Webdesign</span>
                 </div>
                 
                 <h3>Herausforderung</h3>
-                <p>Eine Gesundheits-App sollte komplexe medizinische Daten verständlich darstellen und dabei höchste Accessibility-Standards erfüllen.</p>
+                <p>Ein Technologie-Unternehmen benötigte eine umfassende Online-Marketing-Strategie zur Markteinführung eines neuen Produkts.</p>
                 
                 <h3>Lösung</h3>
-                <p>Entwicklung einer intuitiven Benutzeroberfläche mit klaren Datenvisualisierungen und vollständiger Barrierefreiheit nach WCAG 2.1 AA.</p>
+                <p>Entwicklung einer 360°-Marketing-Kampagne mit Landing Pages, Social Media Content, Google Ads und Newsletter-Design für maximale Reichweite.</p>
                 
                 <h3>Ergebnis</h3>
-                <p>Eine benutzerfreundliche App, die von Ärzten und Patienten gleichermaßen geschätzt wird und alle Accessibility-Standards erfüllt.</p>
+                <p>Erfolgreiche Produkteinführung mit 300% Steigerung der Website-Besucher und 150% mehr qualifizierte Leads innerhalb von 3 Monaten.</p>
                 
                 <h3>Services</h3>
                 <ul>
-                    <li>User Research</li>
-                    <li>Information Architecture</li>
-                    <li>Accessibility Design</li>
-                    <li>Data Visualization</li>
+                    <li>Landing Page Design</li>
+                    <li>Social Media Content</li>
+                    <li>Google Ads Kampagnen</li>
+                    <li>Newsletter Design</li>
+                    <li>SEO-Visuals</li>
                 </ul>
             `
         },
         5: {
-            title: 'Creative Agency',
-            categories: ['Branding', 'Webdesign'],
+            title: 'Corporate Identity Package',
+            categories: ['Printdesign', 'Branding'],
             image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            description: 'Rebranding und Website-Relaunch für eine etablierte Kreativagentur mit internationaler Ausrichtung.',
+            description: 'Komplettes Corporate Design mit Briefschaften, Visitenkarten, Broschüren und Markenrichtlinien für ein Beratungsunternehmen.',
             details: `
-                <h2>Creative Agency</h2>
+                <h2>Corporate Identity Package</h2>
                 <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Creative Agency" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <span class="category">Printdesign</span>
                     <span class="category">Branding</span>
-                    <span class="category">Webdesign</span>
                 </div>
                 
                 <h3>Herausforderung</h3>
-                <p>Eine etablierte Kreativagentur benötigte ein komplettes Rebranding, um ihre internationale Expansion zu unterstützen.</p>
+                <p>Ein wachsendes Beratungsunternehmen benötigte ein professionelles Corporate Design mit allen notwendigen Printmaterialien für den Geschäftsalltag.</p>
                 
                 <h3>Lösung</h3>
-                <p>Entwicklung einer modernen, flexiblen Markenidentität und einer Portfolio-Website, die die kreative Exzellenz der Agentur widerspiegelt.</p>
+                <p>Entwicklung einer zeitlosen Corporate Identity mit umfassendem Printdesign-Paket: Briefschaften, Visitenkarten, Broschüren und Präsentationsvorlagen.</p>
                 
                 <h3>Ergebnis</h3>
-                <p>Eine zeitgemäße Markenidentität und Website, die zu 30% mehr Anfragen und erfolgreicher internationaler Expansion führte.</p>
+                <p>Ein kohärentes Corporate Design, das die Professionalität des Unternehmens unterstreicht und bei Kunden einen bleibenden Eindruck hinterlässt.</p>
                 
                 <h3>Services</h3>
                 <ul>
-                    <li>Rebranding Strategy</li>
+                    <li>Corporate Identity Design</li>
+                    <li>Briefschaften & Vorlagen</li>
+                    <li>Visitenkarten Design</li>
+                    <li>Broschüren & Flyer</li>
                     <li>Visual Identity System</li>
-                    <li>Website Design & Development</li>
-                    <li>Portfolio Presentation</li>
+                    <li>Brand Guidelines</li>
                 </ul>
             `
         },
         6: {
-            title: 'Financial Dashboard',
-            categories: ['UX'],
+            title: 'Social Media Strategy',
+            categories: ['Online Marketing'],
             image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            description: 'Komplexe Finanzinformationen verständlich aufbereitet - UX-Design für ein B2B-Dashboard mit hohen Sicherheitsanforderungen.',
+            description: 'Entwicklung einer kohärenten Social Media Strategie mit Content-Planung, Ads-Kampagnen und Newsletter-Design für ein Tech-Startup.',
             details: `
-                <h2>Financial Dashboard</h2>
+                <h2>Social Media Strategy</h2>
                 <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Financial Dashboard" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-                    <span class="category">UX</span>
+                    <span class="category">Online Marketing</span>
                 </div>
                 
                 <h3>Herausforderung</h3>
-                <p>Ein Fintech-Unternehmen benötigte ein Dashboard, das komplexe Finanzdaten übersichtlich darstellt und höchste Sicherheitsstandards erfüllt.</p>
+                <p>Ein Tech-Startup wollte seine Online-Präsenz ausbauen und benötigte eine kohärente Social Media Strategie für verschiedene Plattformen.</p>
                 
                 <h3>Lösung</h3>
-                <p>Entwicklung einer intuitiven Benutzeroberfläche mit personalisierbaren Dashboards, klaren Datenvisualisierungen und nahtloser Security-Integration.</p>
+                <p>Entwicklung einer umfassenden Social Media Strategie mit Content-Kalender, visuellen Templates, Ads-Kampagnen und Newsletter-Integration.</p>
                 
                 <h3>Ergebnis</h3>
-                <p>Ein benutzerfreundliches Dashboard, das die Effizienz der Nutzer um 50% steigerte und alle Compliance-Anforderungen erfüllt.</p>
+                <p>Steigerung der Social Media Reichweite um 400%, Aufbau einer engagierten Community und erfolgreiche Lead-Generierung über alle Kanäle.</p>
                 
                 <h3>Services</h3>
                 <ul>
-                    <li>UX Research & Strategy</li>
-                    <li>Dashboard Design</li>
-                    <li>Data Visualization</li>
-                    <li>Security UX</li>
+                    <li>Social Media Strategie</li>
+                    <li>Content-Planung & Templates</li>
+                    <li>Facebook & Instagram Ads</li>
+                    <li>Newsletter Design</li>
+                    <li>Community Management</li>
                 </ul>
             `
         }
