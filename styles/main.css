@@ -689,6 +689,14 @@ a:hover {
     .contact-form-container {
         padding: var(--spacing-md);
     }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
 }
 
 /* Utility Classes */
