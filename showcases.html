@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcases - ideas by sabino</title>
+    <meta name="description" content="Projekte und Arbeiten von ideas by sabino - UX, Branding und Webdesign.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo.svg" alt="ideas by sabino" class="logo-img">
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="showcases.html" class="nav-link active">Showcases</a></li>
+                        <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+                        <li><a href="impressum.html" class="nav-link">Impressum</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" aria-label="Menu öffnen">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Showcases</h1>
+                <p>Ausgewählte Projekte aus UX-Design, Branding und digitaler Strategie</p>
+            </div>
+        </section>
+
+        <section class="showcases">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">Alle</button>
+                    <button class="filter-tab" data-filter="ux">UX</button>
+                    <button class="filter-tab" data-filter="branding">Branding</button>
+                    <button class="filter-tab" data-filter="webdesign">Webdesign</button>
+                </div>
+
+                <div class="projects-grid">
+                    <article class="project-card" data-category="ux branding">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sustainable Tech Startup">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-categories">
+                                <span class="category">UX</span>
+                                <span class="category">Branding</span>
+                            </div>
+                            <h3>Sustainable Tech Startup</h3>
+                            <p>Komplette Markenidentität und UX-Strategie für ein nachhaltiges Technologie-Startup. Von der Konzeption bis zur digitalen Umsetzung.</p>
+                            <button class="project-expand" data-project="1">Details ansehen</button>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-category="webdesign ux">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="E-Commerce Platform">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-categories">
+                                <span class="category">Webdesign</span>
+                                <span class="category">UX</span>
+                            </div>
+                            <h3>E-Commerce Platform</h3>
+                            <p>Redesign einer E-Commerce-Plattform mit Fokus auf Conversion-Optimierung und intuitive Nutzererfahrung.</p>
+                            <button class="project-expand" data-project="2">Details ansehen</button>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-category="branding">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Organic Food Brand">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-categories">
+                                <span class="category">Branding</span>
+                            </div>
+                            <h3>Organic Food Brand</h3>
+                            <p>Entwicklung einer authentischen Markenidentität für einen Bio-Lebensmittelhersteller mit regionalem Fokus.</p>
+                            <button class="project-expand" data-project="3">Details ansehen</button>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-category="ux webdesign">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healthcare App">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-categories">
+                                <span class="category">UX</span>
+                                <span class="category">Webdesign</span>
+                            </div>
+                            <h3>Healthcare App</h3>
+                            <p>UX-Design für eine Gesundheits-App mit komplexen Datenvisualisierungen und barrierefreier Bedienung.</p>
+                            <button class="project-expand" data-project="4">Details ansehen</button>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-category="branding webdesign">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Creative Agency">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-categories">
+                                <span class="category">Branding</span>
+                                <span class="category">Webdesign</span>
+                            </div>
+                            <h3>Creative Agency</h3>
+                            <p>Rebranding und Website-Relaunch für eine etablierte Kreativagentur mit internationaler Ausrichtung.</p>
+                            <button class="project-expand" data-project="5">Details ansehen</button>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-category="ux">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Financial Dashboard">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-categories">
+                                <span class="category">UX</span>
+                            </div>
+                            <h3>Financial Dashboard</h3>
+                            <p>Komplexe Finanzinformationen verständlich aufbereitet - UX-Design für ein B2B-Dashboard mit hohen Sicherheitsanforderungen.</p>
+                            <button class="project-expand" data-project="6">Details ansehen</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="kontakt.html">Kontakt</a>
+                    <a href="impressum.html">Impressum</a>
+                    <a href="https://linkedin.com/in/sabino" target="_blank" rel="noopener">LinkedIn</a>
+                </div>
+                <p class="footer-credit">Built with Bolt ✺</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Detail Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <div class="project-detail" id="projectDetail">
+                    <!-- Project details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/showcases.js"></script>
+</body>
+</html>

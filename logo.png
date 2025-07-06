@@ -1,0 +1,6 @@
+<!-- Placeholder for logo.png - This would be replaced with actual logo file -->
+<!-- For now, we'll create a simple SVG logo as a fallback -->
+<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" fill="#003e1f" rx="4"/>
+  <text x="10" y="25" font-family="Work Sans, sans-serif" font-size="14" font-weight="600" fill="#9cce39">ideas by sabino</text>
+</svg>
