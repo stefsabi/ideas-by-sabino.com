@@ -4,7 +4,7 @@
   "description": "Static website for ideas by sabino UX and brand studio",
   "main": "index.html",
   "scripts": {
-    "dev": "python -m http.server 8000",
+    "dev": "npx http-server . -p 8000 -c-1",
     "build": "echo 'Static site - no build needed'",
     "deploy": "echo 'Ready for deployment to Plesk'"
   },
