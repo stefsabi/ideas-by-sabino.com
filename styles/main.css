@@ -386,20 +386,13 @@ a:hover {
 
 /* Hero Section */
 .hero {
-  --curve-color: var(--color-primary);
-  background: var(--curve-color);
+  background: var(--color-primary);
   max-width: 70%;
   padding: 4rem 2rem;
   border-radius: 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   margin: 3rem auto;
   position: relative;
-  -webkit-mask-image: url('hero-mask.svg');
-  mask-image: url('/hero-mask.svg');
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
   text-align: center;
   color: var(--color-white);
 }
