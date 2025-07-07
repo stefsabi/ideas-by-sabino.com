@@ -17,8 +17,8 @@ function initializeMap() {
     try {
         // OpenStreetMap coordinates for Dättwilerstrasse 11, 5405 Baden-Dättwil, AG, Switzerland
         // Source: https://osm.org/go/0Ce9W~mn7?way=134821429
-        const lat = 47.4751;
-        const lng = 8.3089;
+        const lat = 47.4766;
+        const lng = 8.3067;
         
         // Initialize the map
         const map = L.map('map', {
