@@ -146,36 +146,14 @@ a:hover {
     transform: translateZ(-8px) translateX(4px) translateY(4px);
 }
 
-.nav-list {
-    display: flex;
-    list-style: none;
-    gap: var(--spacing-lg);
-}
-
-.nav-link {
-    font-weight: 500;
-    color: var(--color-gray-700);
-    transition: var(--transition);
-    position: relative;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--color-primary);
-}
-
-.nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: var(--color-accent);
-}
-
-.mobile-menu-toggle {
+/* Hide desktop navigation */
+.nav {
     display: none;
+}
+
+/* Menu Toggle Button */
+.mobile-menu-toggle {
+    display: flex;
     flex-direction: column;
     background: none;
     border: none;
@@ -198,17 +176,17 @@ a:hover {
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(135deg, var(--color-primary) 0%, #002d17 100%);
+    background-color: var(--color-primary);
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: var(--spacing-2xl);
-    transform: translateX(-100%);
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0;
+    transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
     visibility: hidden;
@@ -221,14 +199,15 @@ a:hover {
 }
 
 .mobile-menu-header {
-    position: absolute;
-    top: var(--spacing-lg);
+    position: relative;
+    top: 0;
     left: var(--spacing-lg);
     right: var(--spacing-lg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1002;
+    padding: var(--spacing-lg) 0;
+    z-index: 1001;
 }
 
 .mobile-menu-logo {
@@ -253,8 +232,8 @@ a:hover {
 
 .mobile-menu-close {
     background: none;
-    border: 2px solid var(--color-white);
-    color: var(--color-white);
+    border: none;
+    color: var(--color-primary);
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -263,89 +242,94 @@ a:hover {
     justify-content: center;
     cursor: pointer;
     font-size: 1.5rem;
+    font-weight: bold;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu-close:hover {
-    background-color: var(--color-white);
-    color: var(--color-primary);
+    background-color: var(--color-gray-100);
     transform: rotate(90deg);
 }
 
 .mobile-menu-nav {
     width: 100%;
-    max-width: 600px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--spacing-2xl);
 }
 
 .mobile-menu-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 .mobile-menu-item {
-    margin-bottom: var(--spacing-lg);
+    margin: 0;
     position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.mobile-menu-item:last-child {
+    border-bottom: none;
+}
 .mobile-menu-link {
     font-family: var(--font-secondary);
-    font-size: 3rem;
-    font-weight: 300;
+    font-size: 2.5rem;
+    font-weight: 400;
     color: var(--color-white);
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     display: block;
-    padding: var(--spacing-sm) 0;
+    padding: var(--spacing-xl) 0;
     position: relative;
     transition: all 0.4s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
 }
 
 .mobile-menu-link:hover {
     color: var(--color-accent);
-    transform: translateX(20px);
-    letter-spacing: 4px;
+    transform: translateX(10px);
+    letter-spacing: 5px;
 }
 
-.mobile-menu-link::before {
-    content: '';
-    position: absolute;
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 2px;
-    background-color: var(--color-accent);
-    transition: width 0.4s ease;
-}
-
-.mobile-menu-link:hover::before {
-    width: 15px;
-}
 
 .mobile-menu-footer {
-    position: absolute;
-    bottom: var(--spacing-2xl);
-    left: var(--spacing-lg);
-    right: var(--spacing-lg);
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    gap: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobile-menu-tagline {
     color: var(--color-accent);
     font-size: 1rem;
     font-weight: 500;
-    margin-bottom: var(--spacing-md);
+    margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
+    justify-self: start;
 }
 
 .mobile-menu-social {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: center;
+    justify-self: center;
 }
 
 .mobile-menu-social-link {
@@ -358,6 +342,7 @@ a:hover {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    white-space: nowrap;
 }
 
 .mobile-menu-social-link::before {
@@ -375,9 +360,8 @@ a:hover {
 }
 
 .mobile-menu-privacy {
-    margin-top: var(--spacing-md);
-    padding-top: var(--spacing-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
+    justify-self: end;
 }
 
 .mobile-menu-privacy-link {
@@ -388,6 +372,7 @@ a:hover {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    white-space: nowrap;
 }
 
 .mobile-menu-privacy-link::before {
@@ -1197,14 +1182,6 @@ a:hover {
         padding: 0 var(--spacing-md);
     }
     
-    .nav {
-        display: none;
-    }
-    
-    .mobile-menu-toggle {
-        display: flex;
-    }
-    
     .mobile-menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
@@ -1217,9 +1194,27 @@ a:hover {
         transform: rotate(-45deg) translate(7px, -6px);
     }
     
-    /* Adjust mobile menu font sizes for smaller screens */
+    .mobile-menu-footer {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+        text-align: center;
+    }
+    
+    .mobile-menu-tagline,
+    .mobile-menu-social,
+    .mobile-menu-privacy {
+        justify-self: center;
+    }
+    
+    .mobile-menu-social {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
     .mobile-menu-link {
         font-size: 2.5rem;
+        letter-spacing: 2px;
+        padding: var(--spacing-lg) 0;
     }
 }
 
@@ -1231,22 +1226,26 @@ a:hover {
     .mobile-menu-link {
         font-size: 2rem;
         letter-spacing: 1px;
+        padding: var(--spacing-md) 0;
     }
     
     .mobile-menu-link:hover {
         letter-spacing: 2px;
+        transform: translateX(5px);
     }
     
     .mobile-menu-header {
-        top: var(--spacing-md);
+        padding: var(--spacing-md) 0;
         left: var(--spacing-md);
         right: var(--spacing-md);
     }
     
     .mobile-menu-footer {
-        bottom: var(--spacing-lg);
-        left: var(--spacing-md);
-        right: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+    
+    .mobile-menu-nav {
+        padding: 0 var(--spacing-lg);
     }
     
     .hero-title {
