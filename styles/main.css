@@ -386,7 +386,7 @@ a:hover {
 
 /* Hero Section */
 .hero {
-   position: relative;
+  position: relative;
   background: var(--color-primary);
   max-width: 70%;
   padding: 4rem 2rem;
@@ -395,6 +395,8 @@ a:hover {
   margin: 3rem auto;
   overflow: hidden;
   z-index: 1;
+  text-align: center;
+  color: var(--color-white);
 }
 
 .hero-content {
@@ -403,6 +405,7 @@ a:hover {
     position: relative;
     z-index: 2;
 }
+
 .hero::before{
   content: "";
   position: absolute;
