@@ -398,6 +398,8 @@ a:hover {
     border-top-right-radius: 33%;
     border-bottom-left-radius: 28%;
     border-bottom-right-radius: 50%;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 /* Alternative approach with SVG-like curve */
