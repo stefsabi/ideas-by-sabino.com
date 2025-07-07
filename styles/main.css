@@ -386,24 +386,21 @@ a:hover {
 
 /* Hero Section */
 .hero {
-    padding: var(--spacing-3xl) 0;
+    padding: 4rem 2rem;
     text-align: center;
     background: var(--color-primary);
     color: var(--color-white);
     position: relative;
-    margin: 0;
+    margin: 3rem auto;
     overflow: hidden;
-    padding-bottom: calc(var(--spacing-3xl) + 80px);
     border-radius: 20px 25% 20px 25%;
-    max-width: 80%;
-    margin: 0 auto;
+    max-width: 70%;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Alternative approach with SVG-like curve */
-
-
 .hero-content {
-    max-width: 80%;
+    max-width: 800px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
