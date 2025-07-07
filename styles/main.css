@@ -394,8 +394,8 @@ a:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   margin: 3rem auto;
   position: relative;
-  -webkit-mask-image: url('/assets/masks/hero-mask.svg');
-  mask-image: url('/assets/masks/hero-mask.svg');
+  -webkit-mask-image: url('hero-mask.svg');
+  mask-image: url('/hero-mask.svg');
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
