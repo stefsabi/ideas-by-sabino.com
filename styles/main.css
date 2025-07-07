@@ -454,12 +454,15 @@ a:hover {
 /* Spezielle Behandlung für Smart Guard Logo - transparenter Hintergrund */
 .hero-slide[data-slide="3"] .client-logo-img {
     background: transparent;
-    mix-blend-mode: multiply;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2)) contrast(1.1) brightness(1.1);
+    mix-blend-mode: normal;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+    /* Entfernt weißen Hintergrund */
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,1));
+    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,1));
 }
 
 .hero-slide[data-slide="3"] .client-logo-img:hover {
-    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.3)) contrast(1.1) brightness(1.1);
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.3));
 }
 .client-logo-img:hover {
     transform: scale(1.05);
