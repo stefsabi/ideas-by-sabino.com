@@ -15,9 +15,9 @@ function initializeMap() {
     if (!mapElement) return;
     
     try {
-        // Correct coordinates for Dättwilerstrasse 11, 5405 Baden-Dättwil, AG, Switzerland
-        const lat = 47.4751;
-        const lng = 8.3089;
+        // Exact coordinates for Dättwilerstrasse 11, 5405 Baden-Dättwil, AG, Switzerland
+        const lat = 47.4742;
+        const lng = 8.3095;
         
         // Initialize the map
         const map = L.map('map', {
