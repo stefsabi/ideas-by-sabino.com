@@ -386,15 +386,20 @@ a:hover {
 
 /* Hero Section */
 .hero {
-  background: var(--color-primary);
-  max-width: 70%;
-  padding: 4rem 2rem;
-  border-radius: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  margin: 3rem auto;
-  position: relative;
-  text-align: center;
-  color: var(--color-white);
+    background: var(--color-primary);
+    max-width: 70%;
+    padding: 4rem 2rem;
+    border-radius: 40px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 3rem auto;
+    position: relative;
+    text-align: center;
+    color: var(--color-white);
 }
 
 .hero-content {
