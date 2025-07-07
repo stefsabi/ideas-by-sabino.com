@@ -111,7 +111,7 @@ a:hover {
     width: auto;
     position: relative;
     z-index: 2;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     filter: drop-shadow(0 4px 8px rgba(0, 62, 31, 0.2));
 }
 
@@ -123,8 +123,8 @@ a:hover {
 }
 
 .logo-3d:hover .logo-img {
-    transform: rotateY(15deg) rotateX(5deg) translateZ(10px);
-    filter: drop-shadow(0 8px 16px rgba(0, 62, 31, 0.3));
+    transform: rotateY(8deg) rotateX(3deg) translateZ(6px);
+    filter: drop-shadow(0 6px 12px rgba(0, 62, 31, 0.25));
 }
 
 .logo-shadow {
@@ -137,13 +137,13 @@ a:hover {
     transform: translateZ(-5px) translateX(3px) translateY(3px);
     border-radius: 4px;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     filter: blur(2px);
 }
 
 .logo-3d:hover .logo-shadow {
     opacity: 1;
-    transform: translateZ(-10px) translateX(6px) translateY(6px);
+    transform: translateZ(-8px) translateX(4px) translateY(4px);
 }
 
 .nav-list {
