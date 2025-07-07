@@ -203,6 +203,9 @@ a:hover {
         url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
     position: relative;
     color: var(--color-white);
+    border-radius: 0 0 60px 60px;
+    margin: 0 var(--spacing-md);
+    overflow: hidden;
 }
 
 .hero-content {
