@@ -393,7 +393,7 @@ a:hover {
     position: relative;
     margin: 0;
     overflow: hidden;
-    clip-path: ellipse(100% 100% at 50% 0%);
+    
     padding-bottom: calc(var(--spacing-3xl) + 80px);
 }
 
