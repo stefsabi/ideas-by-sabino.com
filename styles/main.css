@@ -730,25 +730,22 @@ a:hover {
     }
     
     .nav {
-        position: fixed;
-        top: 80px;
+        position: absolute;
+        top: 100%;
         left: 0;
         right: 0;
-        bottom: 0;
         background-color: var(--color-white);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(-100%);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        transform: translateY(-10px);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        box-shadow: var(--shadow-lg);
+        z-index: 1000;
     }
     
     .nav.active {
-        transform: translateX(0);
+        transform: translateY(0);
         opacity: 1;
         visibility: visible;
     }
@@ -759,16 +756,16 @@ a:hover {
     
     .nav-list {
         flex-direction: column;
-        gap: var(--spacing-xl);
-        text-align: center;
+        gap: var(--spacing-md);
     }
     
     .nav-link {
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 1.125rem;
+        font-weight: 500;
         padding: var(--spacing-md);
         border-radius: var(--border-radius);
         transition: all 0.3s ease;
+        display: block;
     }
     
     .nav-link:hover {

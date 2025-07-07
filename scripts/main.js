@@ -9,13 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuToggle.addEventListener('click', function() {
             nav.classList.toggle('active');
             mobileMenuToggle.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (nav.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
         });
         
         // Close menu when clicking on nav links
@@ -25,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.addEventListener('click', function() {
                     nav.classList.remove('active');
                     mobileMenuToggle.classList.remove('active');
-                    document.body.style.overflow = '';
                 });
             });
         }
@@ -35,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
                 nav.classList.remove('active');
                 mobileMenuToggle.classList.remove('active');
-                document.body.style.overflow = '';
             }
         });
     }
