@@ -483,9 +483,8 @@ a:hover {
 .service-card {
     background: var(--color-white);
     border-radius: 24px;
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     padding: var(--spacing-xl);
+    box-shadow: 0 8px 32px rgba(0, 62, 31, 0.08);
     border: 1px solid rgba(156, 206, 57, 0.2);
     position: relative;
     overflow: hidden;
@@ -584,9 +583,8 @@ a:hover {
 .testimonial-card {
     background-color: #f6fdf0;
     border-radius: var(--border-radius-lg);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
     border: 2px solid transparent;
     position: relative;
@@ -721,9 +719,8 @@ a:hover {
 .project-card {
     background-color: var(--color-white);
     border-radius: var(--border-radius-lg);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     overflow: hidden;
+    box-shadow: var(--shadow-md);
     transition: var(--transition);
 }
 
@@ -848,8 +845,7 @@ a:hover {
     background-color: var(--color-white);
     padding: var(--spacing-xl);
     border-radius: var(--border-radius-lg);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
 .contact-form {
@@ -910,9 +906,8 @@ a:hover {
 .map-container {
     background-color: var(--color-white);
     border-radius: var(--border-radius-lg);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     overflow: hidden;
+    box-shadow: var(--shadow-md);
 }
 
 .map-header {
@@ -1066,13 +1061,12 @@ a:hover {
     margin: var(--spacing-md);
     padding: 0;
     border-radius: var(--border-radius-lg);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     max-width: 800px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
+    box-shadow: var(--shadow-lg);
 }
 
 .modal-close {
