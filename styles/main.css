@@ -1355,6 +1355,14 @@ a:hover {
         padding: 0 var(--spacing-md);
     }
     
+    .hero {
+        max-width: 95%;
+        margin: 1rem auto;
+        padding: 3rem 1.5rem;
+        background-attachment: scroll;
+        min-height: 500px;
+    }
+    
     .mobile-menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
@@ -1435,6 +1443,13 @@ a:hover {
 @media (max-width: 480px) {
     .mobile-menu-overlay {
         padding: var(--spacing-lg);
+    }
+    
+    .hero {
+        max-width: 98%;
+        margin: 0.5rem auto;
+        padding: 2.5rem 1rem;
+        min-height: 450px;
     }
     
     .mobile-menu-link {
