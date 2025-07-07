@@ -474,37 +474,38 @@ a:hover {
 
 /* Slider Navigation */
 .slider-arrow {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: var(--color-white);
-    width: 50px;
-    height: 50px;
+    background: var(--color-white);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     z-index: 10;
 }
 
 .slider-arrow:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
     transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 24px rgba(0, 62, 31, 0.25);
 }
 
 .slider-arrow--prev {
-    left: 20px;
+    left: calc((100% - 70%) / 4 - 30px);
 }
 
 .slider-arrow--next {
-    right: 20px;
+    right: calc((100% - 70%) / 4 - 30px);
 }
 
 .slider-dots {

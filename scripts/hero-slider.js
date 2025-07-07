@@ -191,16 +191,17 @@ sliderStyle.textContent = `
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .slider-arrow {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
+            position: absolute;
         }
         
         .slider-arrow--prev {
-            left: 10px;
+            left: -25px;
         }
         
         .slider-arrow--next {
-            right: 10px;
+            right: -25px;
         }
         
         .slider-dots {
@@ -224,8 +225,16 @@ sliderStyle.textContent = `
     
     @media (max-width: 480px) {
         .slider-arrow {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
+        }
+        
+        .slider-arrow--prev {
+            left: -22px;
+        }
+        
+        .slider-arrow--next {
+            right: -22px;
         }
         
         .slider-dot {
