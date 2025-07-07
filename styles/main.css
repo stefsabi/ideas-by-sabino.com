@@ -474,7 +474,7 @@ a:hover {
 
 /* Slider Navigation */
 .slider-arrow {
-    position: fixed;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: var(--color-white);
@@ -501,16 +501,16 @@ a:hover {
 }
 
 .slider-arrow--prev {
-    left: calc((100% - 70%) / 4 - 30px);
+    left: -80px;
 }
 
 .slider-arrow--next {
-    right: calc((100% - 70%) / 4 - 30px);
+    right: -80px;
 }
 
 .slider-dots {
-    position: absolute;
-    bottom: -60px;
+    position: relative;
+    margin-top: var(--spacing-xl);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -1339,6 +1339,43 @@ a:hover {
         letter-spacing: 2px;
         padding: var(--spacing-lg) 0;
     }
+    
+    .slider-dots {
+        margin-top: var(--spacing-lg);
+    }
+    
+    .client-name {
+        font-size: 2rem;
+    }
+    
+    .client-description {
+        font-size: 1.125rem;
+    }
+    
+    .slider-arrow {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .slider-arrow--prev {
+        left: -60px;
+    }
+    
+    .slider-arrow--next {
+        right: -60px;
+    }
+    
+    .slider-dots {
+        margin-top: var(--spacing-md);
+    }
+    
+    .client-name {
+        font-size: 1.875rem;
+    }
+    
+    .client-description {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1536,6 +1573,19 @@ a:hover {
     
     .map-wrapper {
         height: 250px;
+    }
+    
+    .slider-arrow--prev {
+        left: -50px;
+    }
+    
+    .slider-arrow--next {
+        right: -50px;
+    }
+    
+    .slider-dot {
+        width: 12px;
+        height: 12px;
     }
 }
 
