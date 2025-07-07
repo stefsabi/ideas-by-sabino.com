@@ -3,11 +3,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const nav = document.querySelector('.nav');
+    const navList = document.querySelector('.nav-list');
     
     if (mobileMenuToggle && nav) {
         mobileMenuToggle.addEventListener('click', function() {
             nav.classList.toggle('active');
             mobileMenuToggle.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close menu when clicking on nav links
+        if (navList) {
+            const navLinks = navList.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                nav.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     }
     
