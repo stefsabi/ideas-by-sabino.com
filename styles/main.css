@@ -717,6 +717,35 @@ a:hover {
     color: var(--color-accent);
 }
 
+.social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.social-links a {
+    color: var(--color-white);
+    opacity: 0.8;
+    transition: var(--transition);
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links a:hover {
+    opacity: 1;
+    color: var(--color-accent);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.social-links svg {
+    width: 20px;
+    height: 20px;
+}
+
 .footer-credit {
     margin: 0;
     opacity: 0.7;
