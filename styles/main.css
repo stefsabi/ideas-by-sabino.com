@@ -731,12 +731,11 @@ a:hover {
     
     .nav {
         position: fixed;
-        top: 0;
+        top: 80px;
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
+        background-color: var(--color-white);
         z-index: 1000;
         display: flex;
         align-items: center;
@@ -745,6 +744,7 @@ a:hover {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+        box-shadow: var(--shadow-lg);
     }
     
     .nav.active {
