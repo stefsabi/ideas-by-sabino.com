@@ -386,7 +386,7 @@ a:hover {
 
 /* Hero Section */
 .hero {
-  position: relative;
+   position: relative;
   background: var(--color-primary);
   max-width: 70%;
   padding: 4rem 2rem;
@@ -404,18 +404,19 @@ a:hover {
     z-index: 2;
 }
 .hero::before{
- content: "";
+  content: "";
   position: absolute;
-  bottom: -1px;
+  bottom: 0;
   left: 0;
-  width: 100%;
+  width: 98%; /* reduziert die Breite leicht */
   height: 60px;
   background: var(--color-primary);
   transform: skewY(-3deg);
   transform-origin: top left;
   z-index: -1;
   border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;  
+  border-bottom-right-radius: 40px;
+  margin-left: 1%;
 }
 .hero-title {
     color: var(--color-white);
