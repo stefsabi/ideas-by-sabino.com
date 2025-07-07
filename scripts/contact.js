@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add CSS for form messages
-const style = document.createElement('style');
+var style = document.createElement('style');
 style.textContent = `
     .form-message {
         padding: var(--spacing-md);

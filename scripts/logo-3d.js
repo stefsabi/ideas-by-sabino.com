@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add CSS for enhanced animations
-const style = document.createElement('style');
+var style = document.createElement('style');
 style.textContent = `
     .logo-3d {
         cursor: pointer;

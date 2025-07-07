@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add CSS for animations
-const style = document.createElement('style');
+var style = document.createElement('style');
 style.textContent = `
     .header.scrolled {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
