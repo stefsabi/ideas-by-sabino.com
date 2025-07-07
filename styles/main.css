@@ -394,10 +394,7 @@ a:hover {
     margin: 0;
     overflow: hidden;
     padding-bottom: calc(var(--spacing-3xl) + 80px);
-    border-top-left-radius: 64%;
-    border-top-right-radius: 33%;
-    border-bottom-left-radius: 28%;
-    border-bottom-right-radius: 50%;
+   border-radius : 10px 25% 20px;
     max-width: 80%;
     margin: 0 auto;
 }
