@@ -437,6 +437,23 @@ a:hover {
     margin-bottom: var(--spacing-lg);
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 120px;
+}
+
+.client-logo-img {
+    max-width: 200px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+}
+
+.client-logo-img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.3));
 }
 
 .logo-placeholder {
