@@ -661,27 +661,77 @@ a:hover {
     width: 100%;
     height: 400px;
     overflow: hidden;
+    background-color: var(--color-gray-100);
 }
 
-.map-wrapper iframe {
+.interactive-map {
     width: 100%;
     height: 100%;
-    border: none;
-    filter: grayscale(20%) contrast(1.1);
-    transition: var(--transition);
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
 }
 
-.map-wrapper:hover iframe {
-    filter: grayscale(0%) contrast(1.2);
+.interactive-map::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 30% 20%, rgba(57, 155, 74, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(156, 206, 57, 0.1) 0%, transparent 50%),
+        linear-gradient(45deg, transparent 40%, rgba(0, 62, 31, 0.05) 50%, transparent 60%);
+    pointer-events: none;
+}
+
+.map-placeholder {
+    position: relative;
+    z-index: 1;
+    max-width: 400px;
+}
+
+.map-placeholder h4 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.map-placeholder p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
+
+.map-coordinates {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid rgba(57, 155, 74, 0.2);
 }
 
 .map-info {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: var(--spacing-lg);
     padding: var(--spacing-xl);
     background-color: var(--color-gray-50);
-    align-items: center;
+    text-align: center;
 }
 
 .map-address h4 {
@@ -694,6 +744,13 @@ a:hover {
     color: var(--color-gray-600);
     margin-bottom: 0;
     line-height: 1.5;
+}
+
+.map-directions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .directions-button {
@@ -719,6 +776,15 @@ a:hover {
 
 .directions-button svg {
     flex-shrink: 0;
+}
+
+.directions-button--secondary {
+    background-color: var(--color-gray-600);
+}
+
+.directions-button--secondary:hover {
+    background-color: var(--color-gray-700);
+    color: var(--color-white);
 }
 
 .submit-button:hover {

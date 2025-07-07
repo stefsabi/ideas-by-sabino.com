@@ -64,6 +64,57 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Initialize interactive map
+function initializeMap() {
+    const mapElement = document.getElementById('map');
+    if (!mapElement) return;
+    
+    // Create map placeholder content
+    const mapContent = `
+        <div class="map-placeholder">
+            <h4>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Unser Standort in Baden
+            </h4>
+            <p>
+                Wir befinden uns im Herzen von Baden, Schweiz. 
+                Nur wenige Minuten vom Bahnhof entfernt und gut mit 
+                öffentlichen Verkehrsmitteln erreichbar.
+            </p>
+            <div class="map-coordinates">
+                📍 47.4722°N, 8.3056°E
+            </div>
+            <p style="font-size: 0.875rem; color: var(--color-gray-500);">
+                Klicken Sie auf "Route planen" oder "Karte öffnen" für detaillierte Wegbeschreibungen.
+            </p>
+        </div>
+    `;
+    
+    mapElement.innerHTML = mapContent;
+    
+    // Add click interaction
+    mapElement.addEventListener('click', function() {
+        window.open('https://www.google.com/maps/dir//Dättwilerstrasse+11,+5405+Baden,+Schweiz', '_blank');
+    });
+    
+    // Add hover effect
+    mapElement.style.cursor = 'pointer';
+    mapElement.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.02)';
+        this.style.transition = 'transform 0.3s ease';
+    });
+    
+    mapElement.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+}
+
+// Initialize map when page loads
+document.addEventListener('DOMContentLoaded', initializeMap);
+
 // Add CSS for form messages
 var style = document.createElement('style');
 style.textContent = `
