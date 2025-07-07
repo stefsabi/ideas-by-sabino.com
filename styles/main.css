@@ -109,6 +109,41 @@ a:hover {
 .logo-img {
     height: 40px;
     width: auto;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 4px 8px rgba(0, 62, 31, 0.2));
+}
+
+.logo-3d {
+    position: relative;
+    display: inline-block;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.logo-3d:hover .logo-img {
+    transform: rotateY(15deg) rotateX(5deg) translateZ(10px);
+    filter: drop-shadow(0 8px 16px rgba(0, 62, 31, 0.3));
+}
+
+.logo-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(57, 155, 74, 0.3), rgba(156, 206, 57, 0.2));
+    transform: translateZ(-5px) translateX(3px) translateY(3px);
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: blur(2px);
+}
+
+.logo-3d:hover .logo-shadow {
+    opacity: 1;
+    transform: translateZ(-10px) translateX(6px) translateY(6px);
 }
 
 .nav-list {
