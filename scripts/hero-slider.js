@@ -205,7 +205,7 @@ sliderStyle.textContent = `
         }
         
         .slider-dots {
-            bottom: 20px;
+            bottom: -50px;
         }
         
         .client-name {
@@ -238,8 +238,8 @@ sliderStyle.textContent = `
         }
         
         .slider-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
         }
         
         .client-name {
