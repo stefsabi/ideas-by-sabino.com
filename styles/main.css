@@ -386,18 +386,22 @@ a:hover {
 
 /* Hero Section */
 .hero {
- position: relative;
-  background: var(--color-primary);
+  --curve-color: var(--color-primary);
+  background: var(--curve-color);
   max-width: 70%;
   padding: 4rem 2rem;
   border-radius: 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   margin: 3rem auto;
-  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: url('/assets/masks/hero-mask.svg');
+  mask-image: url('/assets/masks/hero-mask.svg');
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   text-align: center;
   color: var(--color-white);
-  mask-image: linear-gradient(to bottom right, black 98%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom right, black 98%, transparent 100%);
 }
 
 .hero-content {
@@ -406,21 +410,7 @@ a:hover {
     position: relative;
     z-index: 2;
 }
-/* Schräge Fläche als unterste Ebene */
-.hero::before{
- content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  background: var(--color-primary);
-  transform: rotate(-2deg);
-  transform-origin: bottom left;
-  z-index: -1;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-}
+
 .hero-title {
     color: var(--color-white);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
