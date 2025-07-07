@@ -81,10 +81,67 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Studio für Identität, Struktur & Sichtbarkeit</h1>
-                    <p class="hero-subtitle">Your Business Coach für UX-Architektur, visuelle Strategien & Klarheit für Marken mit Haltung.</p>
-                    <a href="showcases.html" class="cta-button">Portfolio ansehen</a>
+                <div class="hero-slider">
+                    <div class="hero-slide active" data-slide="0">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Studio für Identität, Struktur & Sichtbarkeit</h1>
+                            <p class="hero-subtitle">Your Business Coach für UX-Architektur, visuelle Strategien & Klarheit für Marken mit Haltung.</p>
+                            <a href="showcases.html" class="cta-button">Portfolio ansehen</a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-slide" data-slide="1">
+                        <div class="hero-content">
+                            <div class="client-logo">
+                                <div class="logo-placeholder">RG</div>
+                            </div>
+                            <h2 class="client-name">RG Baden</h2>
+                            <p class="client-description">Komplette Markenidentität und digitale Präsenz für das Regionalgymnasium Baden. Moderne Website mit intuitiver Navigation und zeitgemäßem Design.</p>
+                            <a href="showcases.html" class="cta-button">Projekt ansehen</a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-slide" data-slide="2">
+                        <div class="hero-content">
+                            <div class="client-logo">
+                                <div class="logo-placeholder">ECW</div>
+                            </div>
+                            <h2 class="client-name">Eislaufclub Wettingen</h2>
+                            <p class="client-description">Frische Vereinsidentität und professionelle Website für den traditionsreichen Eislaufclub. Mitgliederverwaltung und Event-Management inklusive.</p>
+                            <a href="showcases.html" class="cta-button">Projekt ansehen</a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-slide" data-slide="3">
+                        <div class="hero-content">
+                            <div class="client-logo">
+                                <div class="logo-placeholder">SGP</div>
+                            </div>
+                            <h2 class="client-name">Smart Guard Protection AG</h2>
+                            <p class="client-description">Professionelle Corporate Identity und digitale Strategie für innovative Sicherheitslösungen. B2B-fokussierte Website mit Lead-Generierung.</p>
+                            <a href="showcases.html" class="cta-button">Projekt ansehen</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="slider-arrow slider-arrow--prev" aria-label="Vorheriger Slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="slider-arrow slider-arrow--next" aria-label="Nächster Slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="slider-dots">
+                        <button class="slider-dot active" data-slide="0" aria-label="Slide 1"></button>
+                        <button class="slider-dot" data-slide="1" aria-label="Slide 2"></button>
+                        <button class="slider-dot" data-slide="2" aria-label="Slide 3"></button>
+                        <button class="slider-dot" data-slide="3" aria-label="Slide 4"></button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -253,6 +310,7 @@
     </footer>
 
     <script src="scripts/main.js"></script>
+    <script src="scripts/hero-slider.js"></script>
     <script src="scripts/logo-3d.js"></script>
 </body>
 </html>
