@@ -204,8 +204,19 @@ a:hover {
     position: relative;
     color: var(--color-white);
     margin: var(--spacing-lg);
-    border-radius: 60px;
+    border-radius: 80px 40px 60px 20px;
     overflow: hidden;
+    transform: rotate(-1deg);
+    clip-path: polygon(
+        0% 15%, 
+        8% 0%, 
+        92% 5%, 
+        100% 20%, 
+        100% 85%, 
+        92% 100%, 
+        8% 95%, 
+        0% 80%
+    );
 }
 
 .hero-content {
