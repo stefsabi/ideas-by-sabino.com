@@ -403,22 +403,50 @@ a:hover {
 .hero {
     padding: var(--spacing-3xl) 0;
     text-align: center;
-    background: linear-gradient(135deg, var(--color-background) 0%, rgba(217, 243, 186, 0.8) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #002d17 100%);
+    color: var(--color-white);
     position: relative;
     margin: 0;
-    clip-path: polygon(
-        0% 0%, 
-        100% 0%, 
-        100% 75%, 
-        95% 85%, 
-        85% 92%, 
-        70% 96%, 
-        50% 98%, 
-        30% 96%, 
-        15% 92%, 
-        5% 85%, 
-        0% 75%
-    );
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: var(--color-white);
+    clip-path: ellipse(100% 100% at 50% 100%);
+    transform: translateY(60px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    color: var(--color-white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-button {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.cta-button:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .hero-content {
@@ -427,16 +455,17 @@ a:hover {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: var(--spacing-md);
-    color: var(--color-primary);
+    font-weight: 300;
+    line-height: 1.1;
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--color-gray-600);
+    font-size: 1.375rem;
     margin-bottom: var(--spacing-xl);
-    line-height: 1.5;
+    line-height: 1.4;
+    font-weight: 300;
 }
 
 .cta-button {
@@ -460,8 +489,11 @@ a:hover {
 
 /* Services Section */
 .services {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl) 0;
     background: var(--color-white);
+    margin-top: -60px;
+    position: relative;
+    z-index: 3;
 }
 
 .services-grid {
@@ -1216,11 +1248,20 @@ a:hover {
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
     
     .hero-subtitle {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
+    }
+    
+    .hero::after {
+        height: 80px;
+        transform: translateY(40px);
+    }
+    
+    .services {
+        margin-top: -40px;
     }
     
     h1 {
@@ -1267,7 +1308,21 @@ a:hover {
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.875rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .hero::after {
+        height: 60px;
+        transform: translateY(30px);
+    }
+    
+    .services {
+        margin-top: -30px;
+        padding-top: var(--spacing-2xl);
     }
     
     .services,
