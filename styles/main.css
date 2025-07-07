@@ -45,7 +45,7 @@ body {
     font-family: var(--font-primary);
     line-height: 1.6;
     color: var(--color-gray-800);
-    background-color: var(--color-background);
+    background-color: var(--color-white);
 }
 
 .container {
