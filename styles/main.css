@@ -401,17 +401,7 @@ a:hover {
 }
 
 /* Alternative approach with SVG-like curve */
-.hero::before {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    background: var(--color-white);
-    clip-path: ellipse(100% 100% at 50% 100%);
-    z-index: 1;
-}
+
 
 .hero-content {
     position: relative;
