@@ -146,6 +146,8 @@ a:hover {
     border: none;
     cursor: pointer;
     padding: var(--spacing-xs);
+    z-index: 1001;
+    position: relative;
 }
 
 .mobile-menu-toggle span {
@@ -154,6 +156,7 @@ a:hover {
     background-color: var(--color-primary);
     margin: 2px 0;
     transition: var(--transition);
+    border-radius: 2px;
 }
 
 /* Hero Section */
