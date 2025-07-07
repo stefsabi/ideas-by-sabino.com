@@ -386,17 +386,13 @@ a:hover {
 
 /* Hero Section */
 .hero {
+  background: var(--color-primary);
+  max-width: 70%;
     padding: 4rem 2rem;
-    text-align: center;
-    background: var(--color-primary);
-    color: var(--color-white);
-    position: relative;
-    margin: 3rem auto;
-    overflow: hidden;
-    border-radius: 20px 25% 20px 25%;
-    max-width: 70%;
+    border-radius: 40px;
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 3rem auto;
 }
 
 .hero-content {
