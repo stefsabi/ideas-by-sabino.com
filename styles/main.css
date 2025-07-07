@@ -198,47 +198,40 @@ a:hover {
 .hero {
     padding: var(--spacing-3xl) 0;
     text-align: center;
-    background: 
-        linear-gradient(135deg, rgba(0, 62, 31, 0.8) 0%, rgba(57, 155, 74, 0.7) 100%),
-        url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+    background: linear-gradient(135deg, var(--color-background) 0%, rgba(217, 243, 186, 0.8) 100%);
     position: relative;
-    color: var(--color-white);
-    margin: var(--spacing-lg);
-    border-radius: 80px 40px 60px 20px;
-    overflow: hidden;
-    transform: rotate(-1deg);
+    margin: 0;
     clip-path: polygon(
-        0% 15%, 
-        8% 0%, 
-        92% 5%, 
-        100% 20%, 
-        100% 85%, 
-        92% 100%, 
-        8% 95%, 
-        0% 80%
+        0% 0%, 
+        100% 0%, 
+        100% 75%, 
+        95% 85%, 
+        85% 92%, 
+        70% 96%, 
+        50% 98%, 
+        30% 96%, 
+        15% 92%, 
+        5% 85%, 
+        0% 75%
     );
 }
 
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
 }
 
 .hero-title {
     font-size: 3.5rem;
     margin-bottom: var(--spacing-md);
-    color: var(--color-white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--color-primary);
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-gray-600);
     margin-bottom: var(--spacing-xl);
     line-height: 1.5;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .cta-button {
