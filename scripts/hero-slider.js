@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isAutoPlaying) {
             autoPlayInterval = setInterval(() => {
                 nextSlide();
-            }, 5000); // Change slide every 5 seconds
+            }, 8000); // Change slide every 8 seconds
         }
     }
     
@@ -159,11 +159,11 @@ sliderStyle.textContent = `
     }
     
     .hero-slide.active {
-        animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation: slideInFromRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
     
     .hero-slide.prev {
-        animation: slideOutToLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation: slideOutToLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
     
     @keyframes slideInFromRight {
