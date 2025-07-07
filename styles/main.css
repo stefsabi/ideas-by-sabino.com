@@ -261,7 +261,7 @@ a:hover {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-lg);
     max-width: 1000px;
     margin: 0 auto;
@@ -277,6 +277,9 @@ a:hover {
     overflow: hidden;
     transition: var(--transition);
     text-align: left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card::before {
@@ -326,6 +329,7 @@ a:hover {
     margin-bottom: 0;
     font-size: 1.125rem;
     line-height: 1.6;
+    flex-grow: 1;
 }
 
 /* Testimonials Section */
