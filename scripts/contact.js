@@ -30,13 +30,28 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Wird gesendet...';
             submitButton.disabled = true;
             
-            // Simulate API call
-            setTimeout(() => {
-                showMessage('Vielen Dank für Ihre Nachricht! Ich melde mich bald bei Ihnen.', 'success');
-                contactForm.reset();
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }, 2000);
+            // Create mailto link with form data
+            const subject = encodeURIComponent(`Kontaktanfrage von ${data.name}`);
+            const body = encodeURIComponent(`
+Name: ${data.name}
+E-Mail: ${data.email}
+Unternehmen: ${data.company || 'Nicht angegeben'}
+Projektart: ${data.project || 'Nicht angegeben'}
+
+Nachricht:
+${data.message}
+            `);
+            
+            const mailtoLink = `mailto:info@ideas-by-sabino.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            showMessage('Ihr E-Mail-Programm wird geöffnet. Bitte senden Sie die E-Mail ab.', 'success');
+            contactForm.reset();
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
         });
     }
     
