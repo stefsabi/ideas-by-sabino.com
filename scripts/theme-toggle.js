@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add smooth transition when theme changes
-const style = document.createElement('style');
-style.textContent = `
+const themeStyle = document.createElement('style');
+themeStyle.textContent = `
     * {
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
     }
@@ -85,7 +85,7 @@ style.textContent = `
         transition: none !important;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(themeStyle);
 
 // Temporarily disable transitions on page load
 document.body.classList.add('no-transition');

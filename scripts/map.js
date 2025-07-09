@@ -125,8 +125,8 @@ function initializeMap() {
         }).addTo(map);
         
         // Add custom CSS for the popup
-        const style = document.createElement('style');
-        style.textContent = `
+        const mapStyle = document.createElement('style');
+        mapStyle.textContent = `
             .custom-popup .leaflet-popup-content-wrapper {
                 border-radius: 8px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -159,7 +159,7 @@ function initializeMap() {
                 font-size: 10px !important;
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(mapStyle);
         
         // Add click event to map for additional interaction
         map.on('click', function(e) {

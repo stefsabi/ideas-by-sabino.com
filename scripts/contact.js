@@ -80,8 +80,8 @@ ${data.message}
 });
 
 // Add CSS for form messages
-var style = document.createElement('style');
-style.textContent = `
+var contactStyle = document.createElement('style');
+contactStyle.textContent = `
     .form-message {
         padding: var(--spacing-md);
         border-radius: var(--border-radius);
@@ -106,4 +106,4 @@ style.textContent = `
         cursor: not-allowed;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(contactStyle);
