@@ -482,13 +482,13 @@ a:hover {
 }
 
 .hero-slider {
-    width: 100%;
-    max-width: 1400px;
+    width: 100vw;
+    max-width: none;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 2rem;
+    padding: 0;
 }
 
 .hero-slide {
@@ -640,36 +640,41 @@ a:hover {
 }
 
 .hero-content {
-    max-width: 1200px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 1.5rem;
     font-weight: 300;
+    line-height: 1.1;
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    line-height: 1.4;
 }
 
 .client-name {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 1.5rem;
     font-weight: 700;
+    line-height: 1.1;
 }
 
 .client-description {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 2rem;
     opacity: 0.9;
-    max-width: 900px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.4;
 }
 
 .cta-button {
@@ -1427,7 +1432,12 @@ a:hover {
     }
     
     .hero-slider {
-        padding: 0 2rem;
+        padding: 0 1rem;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+        padding: 0 1rem;
     }
     
     .slider-arrow {
@@ -1448,20 +1458,20 @@ a:hover {
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
     }
     
     .client-name {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
     }
     
     .hero-subtitle,
     .client-description {
-        font-size: 1.25rem;
+        font-size: 1.375rem;
     }
     
-    .hero-content {
-        padding: 0 1rem;
+    .client-description {
+        max-width: 100%;
     }
     
     .mobile-menu-toggle.active span:nth-child(1) {
@@ -1548,12 +1558,12 @@ a:hover {
     
     .hero {
         min-height: 100vh;
-        padding: 3rem 1rem 2rem;
+        padding: 2rem 0.5rem;
     }
     
     .hero-content {
         max-width: 100%;
-        padding: var(--spacing-md) var(--spacing-xs);
+        padding: 0 0.5rem;
     }
     
     .slider-arrow {
@@ -1570,19 +1580,20 @@ a:hover {
     }
     
     .hero-title {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
     }
     
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 1.375rem;
     }
     
     .client-name {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
     
     .client-description {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
+        max-width: 100%;
     }
     
     .mobile-menu-link {
