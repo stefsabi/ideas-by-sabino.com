@@ -488,7 +488,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 6rem;
+    padding: 0 2rem;
 }
 
 .hero-slide {
@@ -599,11 +599,15 @@ a:hover {
 }
 
 .slider-arrow--prev {
+    position: fixed;
     left: 2rem;
+    top: 50%;
 }
 
 .slider-arrow--next {
+    position: fixed;
     right: 2rem;
+    top: 50%;
 }
 
 .slider-dots {
@@ -1423,7 +1427,7 @@ a:hover {
     }
     
     .hero-slider {
-        padding: 0 4rem;
+        padding: 0 2rem;
     }
     
     .slider-arrow {
@@ -1432,11 +1436,15 @@ a:hover {
     }
     
     .slider-arrow--prev {
+        position: fixed;
         left: 1rem;
+        top: 50%;
     }
     
     .slider-arrow--next {
+        position: fixed;
         right: 1rem;
+        top: 50%;
     }
     
     .hero-title {
