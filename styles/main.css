@@ -618,11 +618,11 @@ a:hover {
 }
 
 .slider-arrow--prev {
-    left: -80px;
+    left: 2rem;
 }
 
 .slider-arrow--next {
-    right: -80px;
+    right: 2rem;
 }
 
 .slider-dots {
@@ -1546,11 +1546,11 @@ a:hover {
     }
     
     .slider-arrow--prev {
-        left: -60px;
+        left: 1rem;
     }
     
     .slider-arrow--next {
-        right: -60px;
+        right: 1rem;
     }
     
     .slider-dots {
@@ -1785,11 +1785,11 @@ a:hover {
     }
     
     .slider-arrow--prev {
-        left: -50px;
+        left: 0.5rem;
     }
     
     .slider-arrow--next {
-        right: -50px;
+        right: 0.5rem;
     }
     
     .slider-dot {
