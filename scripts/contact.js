@@ -1,5 +1,7 @@
 // Contact form functionality
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Contact form script starting...');
+    
     // Spam protection variables - initialize at top level
     let formStartTime = 0;
     let interactionCount = 0;
@@ -7,30 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Contact form script loaded');
     const contactForm = document.getElementById('contactForm');
-    console.log('Contact form element:', contactForm);
+    console.log('📋 Contact form element found:', !!contactForm);
     
     if (contactForm) {
-        console.log('Contact form found, adding event listener');
+        console.log('✅ Contact form found, adding event listener');
         contactForm.addEventListener('submit', function(e) {
-            console.log('Form submitted!');
+            console.log('📤 Form submitted!');
             e.preventDefault();
             
+            console.log('🛡️ Starting spam protection check...');
             // Anti-bot protection checks
             if (!passesSpamProtection()) {
-                console.log('Spam protection failed');
+                console.log('❌ Spam protection failed');
                 showMessage('Spam-Schutz aktiviert. Bitte versuchen Sie es erneut.', 'error');
                 return;
             }
-            console.log('Spam protection passed');
+            console.log('✅ Spam protection passed');
             
             // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            console.log('Form data:', data);
+            console.log('📝 Form data collected:', data);
             
             // Basic validation
             if (!data.name || !data.email || !data.message) {
-                console.log('Validation failed: missing required fields');
+                console.log('❌ Validation failed: missing required fields');
                 showMessage('Bitte füllen Sie alle Pflichtfelder aus.', 'error');
                 return;
             }
@@ -38,35 +41,37 @@ document.addEventListener('DOMContentLoaded', function() {
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
-                console.log('Email validation failed');
+                console.log('❌ Email validation failed');
                 showMessage('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
                 return;
             }
-            console.log('All validations passed, submitting form');
+            console.log('✅ All validations passed, submitting form');
             
             // Submit form directly
             const submitButton = this.querySelector('.submit-button');
             const originalText = submitButton.textContent;
             
+            console.log('🔄 Changing button state...');
             submitButton.textContent = 'Wird gesendet...';
             submitButton.disabled = true;
             
             // Submit to form handler service
+            console.log('📧 Starting email submission...');
             submitContactForm(data, submitButton, originalText);
         });
         
         // Initialize spam protection
-        console.log('Initializing spam protection');
+        console.log('🛡️ Initializing spam protection');
         initSpamProtection(contactForm);
     } else {
-        console.error('Contact form not found!');
+        console.error('❌ Contact form not found!');
     }
     
     async function submitContactForm(data, submitButton, originalText) {
-        console.log('Submitting form with data:', data);
+        console.log('📧 Submitting form with data:', data);
         try {
             // Real form submission to Formspree
-            console.log('Sending real email via Formspree...');
+            console.log('📮 Sending real email via Formspree...');
             
             const response = await fetch('https://formspree.io/f/xdkogkvo', {
                 method: 'POST',
@@ -85,22 +90,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
             });
             
-            console.log('Response status:', response.status);
+            console.log('📬 Response status:', response.status);
             
             if (response.ok) {
-                console.log('Email sent successfully!');
+                console.log('✅ Email sent successfully!');
                 showSuccessConfirmation(data);
                 
                 // Reset form after successful submission
                 contactForm.reset();
             } else {
                 const errorData = await response.json();
-                console.error('Formspree error:', errorData);
+                console.error('❌ Formspree error:', errorData);
                 throw new Error(`Server responded with ${response.status}: ${errorData.error || 'Unknown error'}`);
             }
             
         } catch (error) {
-            console.error('Form submission error:', error);
+            console.error('❌ Form submission error:', error);
             
             // Show user-friendly error message
             showMessage(
@@ -108,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'error'
             );
         } finally {
+            console.log('🔄 Resetting button state...');
             submitButton.textContent = originalText;
             submitButton.disabled = false;
         }
@@ -256,30 +262,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function initSpamProtection(form) {
-        console.log('Spam protection initialized');
+        console.log('🛡️ Spam protection initialized');
         formStartTime = Date.now();
         interactionCount = 0;
         mouseMovements = 0;
         
         // Track user interactions
         const formInputs = form.querySelectorAll('input, textarea, select');
-        console.log('Found form inputs:', formInputs.length);
+        console.log('📝 Found form inputs:', formInputs.length);
         formInputs.forEach(input => {
             input.addEventListener('focus', () => {
                 interactionCount++;
-                console.log('Interaction count:', interactionCount);
+                console.log('👆 Interaction count:', interactionCount);
             });
             input.addEventListener('input', () => {
                 interactionCount++;
-                console.log('Interaction count:', interactionCount);
+                console.log('⌨️ Interaction count:', interactionCount);
             });
         });
         
         // Track mouse movements (human behavior)
         form.addEventListener('mousemove', () => {
             mouseMovements++;
-            if (mouseMovements % 10 === 0) {
-                console.log('Mouse movements:', mouseMovements);
+            if (mouseMovements % 5 === 0) {
+                console.log('🖱️ Mouse movements:', mouseMovements);
             }
         });
         
@@ -298,12 +304,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function passesSpamProtection() {
-        console.log('Checking spam protection...');
+        console.log('🛡️ Checking spam protection...');
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
         
         const timeTaken = Date.now() - formStartTime;
-        console.log('Form stats:', {
+        console.log('📊 Form stats:', {
             timeTaken: timeTaken + 'ms',
             interactionCount,
             mouseMovements,
@@ -312,25 +318,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 1. Honeypot check - if filled, it's a bot
         if (data.website && data.website.trim() !== '') {
-            console.log('Spam detected: Honeypot field filled');
+            console.log('🚫 Spam detected: Honeypot field filled');
             return false;
         }
         
         // 2. Time-based check - too fast submission indicates bot (very relaxed)
         if (timeTaken < 1000) { // Less than 1 second
-            console.log('Spam detected: Form submitted too quickly');
+            console.log('🚫 Spam detected: Form submitted too quickly');
             return false;
         }
         
         // 3. Interaction check - bots don't interact naturally (very relaxed)
         if (interactionCount < 1) { // At least one interaction
-            console.log('Spam detected: Insufficient user interaction');
+            console.log('🚫 Spam detected: Insufficient user interaction');
             return false;
         }
         
         // 4. Mouse movement check - bots often don't move mouse (disabled for now)
         // if (mouseMovements < 1) {
-        //     console.log('Spam detected: No mouse movement detected');
+        //     console.log('🚫 Spam detected: No mouse movement detected');
         //     return false;
         // }
         
@@ -340,31 +346,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const hasSpamContent = spamKeywords.some(keyword => message.includes(keyword));
         
         if (hasSpamContent) {
-            console.log('Spam detected: Spam keywords found');
+            console.log('🚫 Spam detected: Spam keywords found');
             return false;
         }
         
         // 6. Length validation - too short or too long messages
         if (data.message.length < 5 || data.message.length > 5000) {
-            console.log('Spam detected: Message length suspicious');
+            console.log('🚫 Spam detected: Message length suspicious');
             return false;
         }
         
         // 7. Email validation - advanced pattern check
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!emailPattern.test(data.email)) {
-            console.log('Spam detected: Invalid email format');
+            console.log('🚫 Spam detected: Invalid email format');
             return false;
         }
         
         // 8. Name validation - check for suspicious patterns
         // Relaxed name validation - allow more characters
         if (data.name.length < 2 || data.name.length > 100) {
-            console.log('Spam detected: Name too short or too long');
+            console.log('🚫 Spam detected: Name too short or too long');
             return false;
         }
         
-        console.log('All spam protection checks passed!');
+        console.log('✅ All spam protection checks passed!');
         return true;
     }
 });
