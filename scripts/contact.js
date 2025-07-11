@@ -23,14 +23,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Simulate form submission
+            // Submit form directly
             const submitButton = this.querySelector('.submit-button');
             const originalText = submitButton.textContent;
             
             submitButton.textContent = 'Wird gesendet...';
             submitButton.disabled = true;
             
-            // Create mailto link with form data
+            // Submit to form handler service
+            submitContactForm(data, submitButton, originalText);
+        });
+    }
+    
+    async function submitContactForm(data, submitButton, originalText) {
+        try {
+            // Using Formspree as form handler (free service)
+            const response = await fetch('https://formspree.io/f/xdkogkpw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    company: data.company || 'Nicht angegeben',
+                    project: data.project || 'Nicht angegeben',
+                    message: data.message,
+                    _subject: `Kontaktanfrage von ${data.name}`,
+                    _replyto: data.email
+                })
+            });
+            
+            if (response.ok) {
+                showMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich versendet. Wir melden uns bald bei Ihnen.', 'success');
+                contactForm.reset();
+            } else {
+                throw new Error('Fehler beim Versenden');
+            }
+            
+        } catch (error) {
+            console.error('Form submission error:', error);
+            
+            // Fallback to mailto if service fails
             const subject = encodeURIComponent(`Kontaktanfrage von ${data.name}`);
             const body = encodeURIComponent(`
 Name: ${data.name}
@@ -43,16 +77,13 @@ ${data.message}
             `);
             
             const mailtoLink = `mailto:info@ideas-by-sabino.com?subject=${subject}&body=${body}`;
-            
-            // Open email client
             window.location.href = mailtoLink;
             
-            // Show success message
-            showMessage('Ihr E-Mail-Programm wird geöffnet. Bitte senden Sie die E-Mail ab.', 'success');
-            contactForm.reset();
+            showMessage('Direkter Versand nicht möglich. Ihr E-Mail-Programm wird geöffnet.', 'warning');
+        } finally {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
-        });
+        }
     }
     
     function showMessage(message, type) {
@@ -99,6 +130,12 @@ contactStyle.textContent = `
         background-color: #f8d7da;
         color: #721c24;
         border: 1px solid #f5c6cb;
+    }
+    
+    .form-message--warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
     }
     
     .submit-button:disabled {
