@@ -1,89 +1,158 @@
-// Contact form functionality
+// Contact form functionality with enhanced anti-bot protection
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Contact form script starting...');
     
-    // Spam protection variables - initialize at top level
-    let formStartTime = 0;
+    // Anti-bot tracking variables
+    let formStartTime = Math.floor(Date.now() / 1000);
     let interactionCount = 0;
     let mouseMovements = 0;
+    let keystrokes = 0;
+    let focusEvents = 0;
     
-    console.log('Contact form script loaded');
     const contactForm = document.getElementById('contactForm');
     console.log('📋 Contact form element found:', !!contactForm);
     
     if (contactForm) {
-        console.log('✅ Contact form found, adding event listener');
-        contactForm.addEventListener('submit', function(e) {
+        console.log('✅ Contact form found, initializing anti-bot protection');
+        initAntiBot();
+        
+        contactForm.addEventListener('submit', async function(e) {
             console.log('📤 Form submitted!');
             e.preventDefault();
             
-            console.log('🛡️ Starting spam protection check...');
-            // Anti-bot protection checks
-            if (!passesSpamProtection()) {
-                console.log('❌ Spam protection failed');
-                showMessage('Spam-Schutz aktiviert. Bitte versuchen Sie es erneut.', 'error');
-                return;
-            }
-            console.log('✅ Spam protection passed');
+            const submitButton = contactForm.querySelector('.submit-button');
+            const originalText = submitButton.textContent;
             
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            console.log('📝 Form data collected:', data);
-            
-            // Basic validation
-            if (!data.name || !data.email || !data.message) {
-                console.log('❌ Validation failed: missing required fields');
-                showMessage('Bitte füllen Sie alle Pflichtfelder aus.', 'error');
-            }
-            // Use our own PHP handler
-            console.log('📮 Sending via PHP handler...');
-            
-            const response = await fetch('contact-handler.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+            try {
+                // Show loading state
+                submitButton.textContent = 'Wird gesendet...';
+                submitButton.disabled = true;
+                
+                // Get form data
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                // Add anti-bot data
+                data.form_start_time = formStartTime;
+                data.interaction_count = interactionCount;
+                data.mouse_movements = mouseMovements;
+                data.keystrokes = keystrokes;
+                data.focus_events = focusEvents;
+                
+                console.log('📝 Form data with anti-bot metrics:', {
                     name: data.name,
                     email: data.email,
-                    company: data.company || '',
-                    project: data.project || '',
-                    message: data.message,
-                    website: data.website || '' // honeypot field
-                })
+                    company: data.company,
+                    project: data.project,
+                    message: data.message.substring(0, 50) + '...',
+                    form_time: (Math.floor(Date.now() / 1000) - formStartTime) + 's',
+                    interactions: interactionCount,
+                    mouse_movements: mouseMovements,
+                    keystrokes: keystrokes,
+                    focus_events: focusEvents
+                });
+                
+                // Basic validation
+                if (!data.name || !data.email || !data.message) {
+                    throw new Error('Bitte füllen Sie alle Pflichtfelder aus.');
+                }
+                
+                if (data.message.length < 10) {
+                    throw new Error('Die Nachricht muss mindestens 10 Zeichen lang sein.');
+                }
+                
+                console.log('📮 Sending to PHP handler...');
+                
+                const response = await fetch('contact-handler.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                console.log('📬 PHP handler response status:', response.status);
+                
+                const result = await response.json();
+                console.log('📋 PHP handler response:', result);
+                
+                if (response.ok && result.success) {
+                    console.log('✅ Email sent successfully!');
+                    showSuccessConfirmation(result.data);
+                    contactForm.reset();
+                    resetAntiBot();
+                } else {
+                    console.error('❌ PHP handler failed:', result.message);
+                    throw new Error(result.message || 'Fehler beim Versenden der E-Mail');
+                }
+                
+            } catch (error) {
+                console.error('❌ Form submission error:', error);
+                showMessage(error.message, 'error');
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+    }
+    
+    function initAntiBot() {
+        console.log('🛡️ Initializing anti-bot protection...');
+        
+        // Track all form interactions
+        const formInputs = contactForm.querySelectorAll('input, textarea, select');
+        
+        formInputs.forEach(input => {
+            // Track focus events
+            input.addEventListener('focus', () => {
+                focusEvents++;
+                interactionCount++;
+                console.log('👆 Focus event - Total interactions:', interactionCount);
             });
             
-            console.log('📬 PHP handler response status:', response.status);
+            // Track input events
+            input.addEventListener('input', () => {
+                interactionCount++;
+                console.log('⌨️ Input event - Total interactions:', interactionCount);
+            });
             
-            const result = await response.json();
-            console.log('📋 PHP handler response:', result);
-            
-            if (response.ok && result.success) {
-                console.log('✅ Email sent successfully via PHP handler!');
-                showSuccessConfirmation(data);
-                
-                // Reset form after successful submission
-                contactForm.reset();
-            } else {
-                console.error('❌ PHP handler failed:', result.message);
-                throw new Error(result.message || 'Fehler beim Versenden der E-Mail');
+            // Track keystrokes in text fields
+            if (input.type === 'text' || input.type === 'email' || input.tagName === 'TEXTAREA') {
+                input.addEventListener('keydown', () => {
+                    keystrokes++;
+                    if (keystrokes % 10 === 0) {
+                        console.log('⌨️ Keystrokes:', keystrokes);
+                    }
+                });
             }
-            
-        } catch (error) {
-            console.error('❌ Form submission error:', error);
-            
-            // Show user-friendly error message
-            showMessage(
-                'Fehler beim Versenden der E-Mail. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@ideas-by-sabino.com', 
-                'error'
-            );
-        } finally {
-            console.log('🔄 Resetting button state...');
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-        }
-        )
+        });
+        
+        // Track mouse movements (human behavior indicator)
+        contactForm.addEventListener('mousemove', () => {
+            mouseMovements++;
+            if (mouseMovements % 20 === 0) {
+                console.log('🖱️ Mouse movements:', mouseMovements);
+            }
+        });
+        
+        // Track form visibility (tab switching detection)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                interactionCount++;
+                console.log('👁️ Tab focus - Total interactions:', interactionCount);
+            }
+        });
+        
+        console.log('🛡️ Anti-bot protection initialized at timestamp:', formStartTime);
+    }
+    
+    function resetAntiBot() {
+        formStartTime = Math.floor(Date.now() / 1000);
+        interactionCount = 0;
+        mouseMovements = 0;
+        keystrokes = 0;
+        focusEvents = 0;
+        console.log('🔄 Anti-bot metrics reset');
     }
     
     function showSuccessConfirmation(data) {
@@ -118,23 +187,22 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <span class="summary-label">E-Mail:</span>
                                 <span class="summary-value">${data.email}</span>
                             </div>
-                            ${data.company ? `
+                            ${data.company && data.company !== 'Nicht angegeben' ? `
                             <div class="summary-item">
                                 <span class="summary-label">Unternehmen:</span>
                                 <span class="summary-value">${data.company}</span>
                             </div>
                             ` : ''}
-                            ${data.project ? `
+                            ${data.project && data.project !== 'Nicht angegeben' ? `
                             <div class="summary-item">
                                 <span class="summary-label">Projektart:</span>
-                                <span class="summary-value">${getProjectLabel(data.project)}</span>
+                                <span class="summary-value">${data.project}</span>
                             </div>
                             ` : ''}
-                        </div>
-                        
-                        <div class="message-preview">
-                            <span class="summary-label">Ihre Nachricht:</span>
-                            <div class="message-text">"${data.message.length > 150 ? data.message.substring(0, 150) + '...' : data.message}"</div>
+                            <div class="summary-item">
+                                <span class="summary-label">Gesendet am:</span>
+                                <span class="summary-value">${data.timestamp}</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -144,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <li>📧 Ihre Nachricht wurde erfolgreich an <strong>info@ideas-by-sabino.com</strong> übermittelt</li>
                             <li>⏰ Wir melden uns innerhalb von <strong>24 Stunden</strong> bei Ihnen zurück</li>
                             <li>📞 Bei dringenden Anfragen erreichen Sie uns unter <strong>+41 79 460 23 23</strong></li>
-                            <li>✅ Sie erhalten eine <strong>Kopie dieser Nachricht</strong> an Ihre E-Mail-Adresse</li>
+                            <li>✅ Sie erhalten eine <strong>Bestätigungs-E-Mail</strong> an Ihre E-Mail-Adresse</li>
                         </ul>
                     </div>
                     
@@ -172,17 +240,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
     
-    function getProjectLabel(value) {
-        const labels = {
-            'ux': 'UX-Design',
-            'branding': 'Branding',
-            'webdesign': 'Webdesign',
-            'strategy': 'Digitale Strategie',
-            'other': 'Sonstiges'
-        };
-        return labels[value] || value;
-    }
-    
     // Global function to reset form
     window.resetContactForm = function() {
         // Remove confirmation
@@ -194,15 +251,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show and reset form
         contactForm.style.display = 'flex';
         contactForm.reset();
+        resetAntiBot();
         
         // Scroll back to form
         contactForm.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
-        
-        // Reinitialize spam protection
-        initSpamProtection(contactForm);
     };
     
     function showMessage(message, type) {
@@ -226,119 +281,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 messageEl.remove();
             }
         }, 5000);
-    }
-    
-    function initSpamProtection(form) {
-        console.log('🛡️ Spam protection initialized');
-        formStartTime = Date.now();
-        interactionCount = 0;
-        mouseMovements = 0;
         
-        // Track user interactions
-        const formInputs = form.querySelectorAll('input, textarea, select');
-        console.log('📝 Found form inputs:', formInputs.length);
-        formInputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                interactionCount++;
-                console.log('👆 Interaction count:', interactionCount);
-            });
-            input.addEventListener('input', () => {
-                interactionCount++;
-                console.log('⌨️ Interaction count:', interactionCount);
-            });
+        // Scroll to message
+        messageEl.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
         });
-        
-        // Track mouse movements (human behavior)
-        form.addEventListener('mousemove', () => {
-            mouseMovements++;
-            if (mouseMovements % 5 === 0) {
-                console.log('🖱️ Mouse movements:', mouseMovements);
-            }
-        });
-        
-        // Track typing patterns
-        const messageField = document.getElementById('message');
-        if (messageField) {
-            let typingPattern = [];
-            messageField.addEventListener('keydown', (e) => {
-                typingPattern.push(Date.now());
-                // Keep only last 10 keystrokes
-                if (typingPattern.length > 10) {
-                    typingPattern.shift();
-                }
-            });
-        }
-    }
-    
-    function passesSpamProtection() {
-        console.log('🛡️ Checking spam protection...');
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        const timeTaken = Date.now() - formStartTime;
-        console.log('📊 Form stats:', {
-            timeTaken: timeTaken + 'ms',
-            interactionCount,
-            mouseMovements,
-            honeypot: data.website
-        });
-        
-        // 1. Honeypot check - if filled, it's a bot
-        if (data.website && data.website.trim() !== '') {
-            console.log('🚫 Spam detected: Honeypot field filled');
-            return false;
-        }
-        
-        // 2. Time-based check - too fast submission indicates bot (very relaxed)
-        if (timeTaken < 1000) { // Less than 1 second
-            console.log('🚫 Spam detected: Form submitted too quickly');
-            return false;
-        }
-        
-        // 3. Interaction check - bots don't interact naturally (very relaxed)
-        if (interactionCount < 1) { // At least one interaction
-            console.log('🚫 Spam detected: Insufficient user interaction');
-            return false;
-        }
-        
-        // 4. Mouse movement check - bots often don't move mouse (disabled for now)
-        // if (mouseMovements < 1) {
-        //     console.log('🚫 Spam detected: No mouse movement detected');
-        //     return false;
-        // }
-        
-        // 5. Content validation - check for spam patterns
-        const message = data.message.toLowerCase();
-        const spamKeywords = ['viagra', 'casino', 'lottery', 'winner', 'congratulations', 'click here', 'free money', 'earn money fast'];
-        const hasSpamContent = spamKeywords.some(keyword => message.includes(keyword));
-        
-        if (hasSpamContent) {
-            console.log('🚫 Spam detected: Spam keywords found');
-            return false;
-        }
-        
-        // 6. Length validation - too short or too long messages
-        if (data.message.length < 5 || data.message.length > 5000) {
-            console.log('🚫 Spam detected: Message length suspicious');
-            return false;
-        }
-        
-        // 7. Email validation - advanced pattern check
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailPattern.test(data.email)) {
-            console.log('🚫 Spam detected: Invalid email format');
-            return false;
-        }
-        
-        // 8. Name validation - check for suspicious patterns
-        // Relaxed name validation - allow more characters
-        if (data.name.length < 2 || data.name.length > 100) {
-            console.log('🚫 Spam detected: Name too short or too long');
-            return false;
-        }
-        
-        console.log('✅ All spam protection checks passed!');
-        return true;
     }
 });
 
@@ -350,6 +298,7 @@ contactStyle.textContent = `
         border-radius: var(--border-radius);
         margin-bottom: var(--spacing-md);
         font-weight: 500;
+        animation: slideInDown 0.3s ease-out;
     }
     
     .form-message--success {
@@ -373,6 +322,17 @@ contactStyle.textContent = `
     .submit-button:disabled {
         opacity: 0.6;
         cursor: not-allowed;
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 `;
 document.head.appendChild(contactStyle);
