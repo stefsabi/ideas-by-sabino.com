@@ -228,6 +228,12 @@
                                 <textarea id="message" name="message" rows="5" required placeholder="Erzählen Sie mir von Ihrem Projekt..."></textarea>
                             </div>
                             
+                            <!-- Honeypot field - hidden from users, visible to bots -->
+                            <div class="honeypot-field">
+                                <label for="website">Website (bitte leer lassen)</label>
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                            </div>
+                            
                             <button type="submit" class="submit-button">Nachricht senden</button>
                         </form>
                     </div>

@@ -1316,6 +1316,32 @@ a:hover {
     background-color: var(--color-primary);
 }
 
+/* Honeypot field - completely hidden from users */
+.honeypot-field {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+
+.honeypot-field input {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    border: none !important;
+    background: none !important;
+    pointer-events: none !important;
+}
+
 /* Legal Content */
 .legal-content {
     padding: var(--spacing-2xl) 0;
