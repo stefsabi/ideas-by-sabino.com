@@ -35,150 +35,38 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!data.name || !data.email || !data.message) {
                 console.log('❌ Validation failed: missing required fields');
                 showMessage('Bitte füllen Sie alle Pflichtfelder aus.', 'error');
-                return;
-            }
+            // Use our own PHP handler
+            console.log('📮 Sending via PHP handler...');
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                console.log('❌ Email validation failed');
-                showMessage('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
-                return;
-            }
-            console.log('✅ All validations passed, submitting form');
+            const response = await fetch('contact-handler.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    company: data.company || '',
+                    project: data.project || '',
+                    message: data.message,
+                    website: data.website || '' // honeypot field
+                })
+            });
             
-            // Submit form directly
-            const submitButton = this.querySelector('.submit-button');
-            const originalText = submitButton.textContent;
+            console.log('📬 PHP handler response status:', response.status);
             
-            console.log('🔄 Changing button state...');
-            submitButton.textContent = 'Wird gesendet...';
-            submitButton.disabled = true;
+            const result = await response.json();
+            console.log('📋 PHP handler response:', result);
             
-            // Submit to form handler service
-            console.log('📧 Starting email submission...');
-            submitContactForm(data, submitButton, originalText);
-        });
-        
-        // Initialize spam protection
-        console.log('🛡️ Initializing spam protection');
-        initSpamProtection(contactForm);
-    } else {
-        console.error('❌ Contact form not found!');
-    }
-    
-    async function submitContactForm(data, submitButton, originalText) {
-        console.log('📧 Submitting form with data:', data);
-        try {
-            // Try multiple email services for reliability
-            console.log('📮 Attempting email submission...');
-            
-            let response;
-            let success = false;
-            
-            // Try Formspree first
-            try {
-                console.log('📮 Trying Formspree...');
-                response = await fetch('https://formspree.io/f/xpznqjqw', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: data.name,
-                        email: data.email,
-                        company: data.company || 'Nicht angegeben',
-                        project: data.project || 'Nicht angegeben',
-                        message: data.message,
-                        _subject: `Neue Kontaktanfrage von ${data.name} - ideas by sabino`,
-                        _replyto: data.email
-                    })
-                });
-                
-                console.log('📬 Formspree response status:', response.status);
-                
-                if (response.ok) {
-                    success = true;
-                    console.log('✅ Formspree successful!');
-                }
-            } catch (formspreeError) {
-                console.log('❌ Formspree failed:', formspreeError.message);
-            }
-            
-            // Try EmailJS as fallback
-            if (!success) {
-                try {
-                    console.log('📮 Trying EmailJS fallback...');
-                    response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            service_id: 'service_ideas_sabino',
-                            template_id: 'template_contact',
-                            user_id: 'user_ideas_sabino',
-                            template_params: {
-                                from_name: data.name,
-                                from_email: data.email,
-                                company: data.company || 'Nicht angegeben',
-                                project: data.project || 'Nicht angegeben',
-                                message: data.message,
-                                to_email: 'info@ideas-by-sabino.com'
-                            }
-                        })
-                    });
-                    
-                    console.log('📬 EmailJS response status:', response.status);
-                    
-                    if (response.ok || response.status === 200) {
-                        success = true;
-                        console.log('✅ EmailJS successful!');
-                    }
-                } catch (emailjsError) {
-                    console.log('❌ EmailJS failed:', emailjsError.message);
-                }
-            }
-            
-            // Try Web3Forms as final fallback
-            if (!success) {
-                try {
-                    console.log('📮 Trying Web3Forms fallback...');
-                    const formData = new FormData();
-                    formData.append('access_key', 'YOUR_WEB3FORMS_KEY');
-                    formData.append('name', data.name);
-                    formData.append('email', data.email);
-                    formData.append('company', data.company || 'Nicht angegeben');
-                    formData.append('project', data.project || 'Nicht angegeben');
-                    formData.append('message', data.message);
-                    formData.append('subject', `Neue Kontaktanfrage von ${data.name} - ideas by sabino`);
-                    
-                    response = await fetch('https://api.web3forms.com/submit', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    
-                    console.log('📬 Web3Forms response status:', response.status);
-                    
-                    if (response.ok) {
-                        success = true;
-                        console.log('✅ Web3Forms successful!');
-                    }
-                } catch (web3Error) {
-                    console.log('❌ Web3Forms failed:', web3Error.message);
-                }
-            }
-            
-            if (success) {
-                console.log('✅ Email sent successfully via one of the services!');
+            if (response.ok && result.success) {
+                console.log('✅ Email sent successfully via PHP handler!');
                 showSuccessConfirmation(data);
                 
                 // Reset form after successful submission
                 contactForm.reset();
             } else {
-                console.error('❌ All email services failed');
-                throw new Error('Alle E-Mail-Services sind momentan nicht verfügbar');
+                console.error('❌ PHP handler failed:', result.message);
+                throw new Error(result.message || 'Fehler beim Versenden der E-Mail');
             }
             
         } catch (error) {
