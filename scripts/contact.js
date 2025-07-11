@@ -60,21 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
     async function submitContactForm(data, submitButton, originalText) {
         console.log('Submitting form with data:', data);
         try {
-            // Simple test submission first - just show success
-            console.log('Simulating form submission...');
+            // Real form submission to Formspree
+            console.log('Sending real email via Formspree...');
             
-            // Simulate network delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // For now, always show success
-            console.log('Form submission successful');
-            showSuccessConfirmation(data);
-            
-            /* TODO: Replace with actual form service later
-            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            const response = await fetch('https://formspree.io/f/xdkogkvo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     name: data.name,
@@ -82,20 +75,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     company: data.company || 'Nicht angegeben',
                     project: data.project || 'Nicht angegeben',
                     message: data.message,
-                    _gotcha: data.website, // Honeypot field
-                    _subject: `Kontaktanfrage von ${data.name}`,
-                    _replyto: data.email,
-                    timestamp: Date.now(),
-                    userAgent: navigator.userAgent.substring(0, 100) // Limited for privacy
+                    _subject: `Neue Kontaktanfrage von ${data.name} - ideas by sabino`,
+                    _replyto: data.email
                 })
             });
-            */
+            
+            console.log('Response status:', response.status);
+            
+            if (response.ok) {
+                console.log('Email sent successfully!');
+                showSuccessConfirmation(data);
+                
+                // Reset form after successful submission
+                contactForm.reset();
+            } else {
+                const errorData = await response.json();
+                console.error('Formspree error:', errorData);
+                throw new Error(`Server responded with ${response.status}: ${errorData.error || 'Unknown error'}`);
+            }
             
         } catch (error) {
             console.error('Form submission error:', error);
             
-            // For testing, show error message
-            showMessage('Fehler beim Versenden. Bitte versuchen Sie es erneut.', 'error');
+            // Show user-friendly error message
+            showMessage(
+                'Fehler beim Versenden der E-Mail. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@ideas-by-sabino.com', 
+                'error'
+            );
         } finally {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
@@ -157,9 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="next-steps">
                         <h4>Wie geht es weiter?</h4>
                         <ul>
-                            <li>📧 Ihre Nachricht wurde an <strong>info@ideas-by-sabino.com</strong> gesendet</li>
+                            <li>📧 Ihre Nachricht wurde erfolgreich an <strong>info@ideas-by-sabino.com</strong> übermittelt</li>
                             <li>⏰ Wir melden uns innerhalb von <strong>24 Stunden</strong> bei Ihnen zurück</li>
                             <li>📞 Bei dringenden Anfragen erreichen Sie uns unter <strong>+41 79 460 23 23</strong></li>
+                            <li>✅ Sie erhalten eine <strong>Kopie dieser Nachricht</strong> an Ihre E-Mail-Adresse</li>
                         </ul>
                     </div>
                     
