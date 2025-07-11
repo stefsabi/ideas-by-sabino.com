@@ -316,23 +316,23 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         
-        // 2. Time-based check - too fast submission indicates bot
-        if (timeTaken < 2000) { // Less than 2 seconds (reduced for testing)
+        // 2. Time-based check - too fast submission indicates bot (very relaxed)
+        if (timeTaken < 1000) { // Less than 1 second
             console.log('Spam detected: Form submitted too quickly');
             return false;
         }
         
-        // 3. Interaction check - bots don't interact naturally
-        if (interactionCount < 2) { // Reduced for testing
+        // 3. Interaction check - bots don't interact naturally (very relaxed)
+        if (interactionCount < 1) { // At least one interaction
             console.log('Spam detected: Insufficient user interaction');
             return false;
         }
         
-        // 4. Mouse movement check - bots often don't move mouse
-        if (mouseMovements < 2) { // Reduced for testing
-            console.log('Spam detected: No mouse movement detected');
-            return false;
-        }
+        // 4. Mouse movement check - bots often don't move mouse (disabled for now)
+        // if (mouseMovements < 1) {
+        //     console.log('Spam detected: No mouse movement detected');
+        //     return false;
+        // }
         
         // 5. Content validation - check for spam patterns
         const message = data.message.toLowerCase();
@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // 6. Length validation - too short or too long messages
-        if (data.message.length < 10 || data.message.length > 2000) {
+        if (data.message.length < 5 || data.message.length > 5000) {
             console.log('Spam detected: Message length suspicious');
             return false;
         }
@@ -358,12 +358,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // 8. Name validation - check for suspicious patterns
-        const namePattern = /^[a-zA-ZäöüÄÖÜß\s\-'\.]{2,50}$/;
-        if (!namePattern.test(data.name)) {
-            console.log('Spam detected: Invalid name format');
+        // Relaxed name validation - allow more characters
+        if (data.name.length < 2 || data.name.length > 100) {
+            console.log('Spam detected: Name too short or too long');
             return false;
         }
         
+        console.log('All spam protection checks passed!');
         return true;
     }
 });
