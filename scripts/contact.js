@@ -1,5 +1,10 @@
 // Contact form functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Spam protection variables - initialize at top level
+    let formStartTime = 0;
+    let interactionCount = 0;
+    let mouseMovements = 0;
+    
     console.log('Contact form script loaded');
     const contactForm = document.getElementById('contactForm');
     console.log('Contact form element:', contactForm);
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Initialize spam protection
         console.log('Initializing spam protection');
-        initSpamProtection();
+        initSpamProtection(contactForm);
     } else {
         console.error('Contact form not found!');
     }
@@ -224,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Reinitialize spam protection
-        initSpamProtection();
+        initSpamProtection(contactForm);
     };
     
     function showMessage(message, type) {
@@ -250,19 +255,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // Spam protection system
-    let formStartTime = 0;
-    let interactionCount = 0;
-    let mouseMovements = 0;
-    
-    function initSpamProtection() {
+    function initSpamProtection(form) {
         console.log('Spam protection initialized');
         formStartTime = Date.now();
         interactionCount = 0;
         mouseMovements = 0;
         
         // Track user interactions
-        const formInputs = contactForm.querySelectorAll('input, textarea, select');
+        const formInputs = form.querySelectorAll('input, textarea, select');
         console.log('Found form inputs:', formInputs.length);
         formInputs.forEach(input => {
             input.addEventListener('focus', () => {
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Track mouse movements (human behavior)
-        contactForm.addEventListener('mousemove', () => {
+        form.addEventListener('mousemove', () => {
             mouseMovements++;
             if (mouseMovements % 10 === 0) {
                 console.log('Mouse movements:', mouseMovements);
