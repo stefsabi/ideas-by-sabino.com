@@ -98,6 +98,124 @@ ${data.message}
         }
     }
     
+    function showSuccessConfirmation(data) {
+        // Hide the form
+        contactForm.style.display = 'none';
+        
+        // Create success confirmation
+        const confirmationHtml = `
+            <div class="form-success-confirmation">
+                <div class="success-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" fill="#399b4a"/>
+                        <path d="M9 12L11 14L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                
+                <h3>Nachricht erfolgreich versendet!</h3>
+                
+                <div class="confirmation-details">
+                    <p class="confirmation-intro">
+                        Vielen Dank für Ihre Kontaktaufnahme. Ihre Nachricht wurde erfolgreich an uns übermittelt.
+                    </p>
+                    
+                    <div class="message-summary">
+                        <h4>Zusammenfassung Ihrer Nachricht:</h4>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <span class="summary-label">Name:</span>
+                                <span class="summary-value">${data.name}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">E-Mail:</span>
+                                <span class="summary-value">${data.email}</span>
+                            </div>
+                            ${data.company ? `
+                            <div class="summary-item">
+                                <span class="summary-label">Unternehmen:</span>
+                                <span class="summary-value">${data.company}</span>
+                            </div>
+                            ` : ''}
+                            ${data.project ? `
+                            <div class="summary-item">
+                                <span class="summary-label">Projektart:</span>
+                                <span class="summary-value">${getProjectLabel(data.project)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="message-preview">
+                            <span class="summary-label">Ihre Nachricht:</span>
+                            <div class="message-text">"${data.message.length > 150 ? data.message.substring(0, 150) + '...' : data.message}"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="next-steps">
+                        <h4>Wie geht es weiter?</h4>
+                        <ul>
+                            <li>📧 Ihre Nachricht wurde an <strong>info@ideas-by-sabino.com</strong> gesendet</li>
+                            <li>⏰ Wir melden uns innerhalb von <strong>24 Stunden</strong> bei Ihnen zurück</li>
+                            <li>📞 Bei dringenden Anfragen erreichen Sie uns unter <strong>+41 79 460 23 23</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="confirmation-actions">
+                        <button type="button" class="new-message-button" onclick="resetContactForm()">
+                            Neue Nachricht senden
+                        </button>
+                        <a href="index.html" class="back-home-button">
+                            Zurück zur Startseite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Insert confirmation after form
+        contactForm.insertAdjacentHTML('afterend', confirmationHtml);
+        
+        // Scroll to confirmation
+        setTimeout(() => {
+            document.querySelector('.form-success-confirmation').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }, 100);
+    }
+    
+    function getProjectLabel(value) {
+        const labels = {
+            'ux': 'UX-Design',
+            'branding': 'Branding',
+            'webdesign': 'Webdesign',
+            'strategy': 'Digitale Strategie',
+            'other': 'Sonstiges'
+        };
+        return labels[value] || value;
+    }
+    
+    // Global function to reset form
+    window.resetContactForm = function() {
+        // Remove confirmation
+        const confirmation = document.querySelector('.form-success-confirmation');
+        if (confirmation) {
+            confirmation.remove();
+        }
+        
+        // Show and reset form
+        contactForm.style.display = 'flex';
+        contactForm.reset();
+        
+        // Scroll back to form
+        contactForm.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Reinitialize spam protection
+        initSpamProtection();
+    };
+    
     function showMessage(message, type) {
         // Remove existing messages
         const existingMessage = document.querySelector('.form-message');
