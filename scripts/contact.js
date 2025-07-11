@@ -70,38 +70,115 @@ document.addEventListener('DOMContentLoaded', function() {
     async function submitContactForm(data, submitButton, originalText) {
         console.log('📧 Submitting form with data:', data);
         try {
-            // Real form submission to Formspree
-            console.log('📮 Sending real email via Formspree...');
+            // Try multiple email services for reliability
+            console.log('📮 Attempting email submission...');
             
-            const response = await fetch('https://formspree.io/f/mrbgkpzk', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: data.name,
-                    email: data.email,
-                    company: data.company || 'Nicht angegeben',
-                    project: data.project || 'Nicht angegeben',
-                    message: data.message,
-                    _subject: `Neue Kontaktanfrage von ${data.name} - ideas by sabino`,
-                    _replyto: data.email
-                })
-            });
+            let response;
+            let success = false;
             
-            console.log('📬 Response status:', response.status);
+            // Try Formspree first
+            try {
+                console.log('📮 Trying Formspree...');
+                response = await fetch('https://formspree.io/f/xpznqjqw', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: data.name,
+                        email: data.email,
+                        company: data.company || 'Nicht angegeben',
+                        project: data.project || 'Nicht angegeben',
+                        message: data.message,
+                        _subject: `Neue Kontaktanfrage von ${data.name} - ideas by sabino`,
+                        _replyto: data.email
+                    })
+                });
+                
+                console.log('📬 Formspree response status:', response.status);
+                
+                if (response.ok) {
+                    success = true;
+                    console.log('✅ Formspree successful!');
+                }
+            } catch (formspreeError) {
+                console.log('❌ Formspree failed:', formspreeError.message);
+            }
             
-            if (response.ok) {
-                console.log('✅ Email sent successfully!');
+            // Try EmailJS as fallback
+            if (!success) {
+                try {
+                    console.log('📮 Trying EmailJS fallback...');
+                    response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            service_id: 'service_ideas_sabino',
+                            template_id: 'template_contact',
+                            user_id: 'user_ideas_sabino',
+                            template_params: {
+                                from_name: data.name,
+                                from_email: data.email,
+                                company: data.company || 'Nicht angegeben',
+                                project: data.project || 'Nicht angegeben',
+                                message: data.message,
+                                to_email: 'info@ideas-by-sabino.com'
+                            }
+                        })
+                    });
+                    
+                    console.log('📬 EmailJS response status:', response.status);
+                    
+                    if (response.ok || response.status === 200) {
+                        success = true;
+                        console.log('✅ EmailJS successful!');
+                    }
+                } catch (emailjsError) {
+                    console.log('❌ EmailJS failed:', emailjsError.message);
+                }
+            }
+            
+            // Try Web3Forms as final fallback
+            if (!success) {
+                try {
+                    console.log('📮 Trying Web3Forms fallback...');
+                    const formData = new FormData();
+                    formData.append('access_key', 'YOUR_WEB3FORMS_KEY');
+                    formData.append('name', data.name);
+                    formData.append('email', data.email);
+                    formData.append('company', data.company || 'Nicht angegeben');
+                    formData.append('project', data.project || 'Nicht angegeben');
+                    formData.append('message', data.message);
+                    formData.append('subject', `Neue Kontaktanfrage von ${data.name} - ideas by sabino`);
+                    
+                    response = await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    console.log('📬 Web3Forms response status:', response.status);
+                    
+                    if (response.ok) {
+                        success = true;
+                        console.log('✅ Web3Forms successful!');
+                    }
+                } catch (web3Error) {
+                    console.log('❌ Web3Forms failed:', web3Error.message);
+                }
+            }
+            
+            if (success) {
+                console.log('✅ Email sent successfully via one of the services!');
                 showSuccessConfirmation(data);
                 
                 // Reset form after successful submission
                 contactForm.reset();
             } else {
-                const errorData = await response.json();
-                console.error('❌ Formspree error:', errorData);
-                throw new Error(`Server responded with ${response.status}: ${errorData.error || 'Unknown error'}`);
+                console.error('❌ All email services failed');
+                throw new Error('Alle E-Mail-Services sind momentan nicht verfügbar');
             }
             
         } catch (error) {
