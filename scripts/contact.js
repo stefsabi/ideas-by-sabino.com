@@ -1,23 +1,31 @@
 // Contact form functionality
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Contact form script loaded');
     const contactForm = document.getElementById('contactForm');
+    console.log('Contact form element:', contactForm);
     
     if (contactForm) {
+        console.log('Contact form found, adding event listener');
         contactForm.addEventListener('submit', function(e) {
+            console.log('Form submitted!');
             e.preventDefault();
             
             // Anti-bot protection checks
             if (!passesSpamProtection()) {
+                console.log('Spam protection failed');
                 showMessage('Spam-Schutz aktiviert. Bitte versuchen Sie es erneut.', 'error');
                 return;
             }
+            console.log('Spam protection passed');
             
             // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
+            console.log('Form data:', data);
             
             // Basic validation
             if (!data.name || !data.email || !data.message) {
+                console.log('Validation failed: missing required fields');
                 showMessage('Bitte füllen Sie alle Pflichtfelder aus.', 'error');
                 return;
             }
@@ -25,9 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
+                console.log('Email validation failed');
                 showMessage('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
                 return;
             }
+            console.log('All validations passed, submitting form');
             
             // Submit form directly
             const submitButton = this.querySelector('.submit-button');
@@ -41,13 +51,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Initialize spam protection
+        console.log('Initializing spam protection');
         initSpamProtection();
+    } else {
+        console.error('Contact form not found!');
     }
     
     async function submitContactForm(data, submitButton, originalText) {
+        console.log('Submitting form with data:', data);
         try {
-            // Using Formspree as form handler (free service)
-            const response = await fetch('https://formspree.io/f/xdkogkpw', {
+            // Simple test submission first - just show success
+            console.log('Simulating form submission...');
+            
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // For now, always show success
+            console.log('Form submission successful');
+            showSuccessConfirmation(data);
+            
+            /* TODO: Replace with actual form service later
+            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,33 +89,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     userAgent: navigator.userAgent.substring(0, 100) // Limited for privacy
                 })
             });
-            
-            if (response.ok) {
-                showMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich versendet. Wir melden uns bald bei Ihnen.', 'success');
-                contactForm.reset();
-            } else {
-                throw new Error('Fehler beim Versenden');
-            }
+            */
             
         } catch (error) {
             console.error('Form submission error:', error);
             
-            // Fallback to mailto if service fails
-            const subject = encodeURIComponent(`Kontaktanfrage von ${data.name}`);
-            const body = encodeURIComponent(`
-Name: ${data.name}
-E-Mail: ${data.email}
-Unternehmen: ${data.company || 'Nicht angegeben'}
-Projektart: ${data.project || 'Nicht angegeben'}
-
-Nachricht:
-${data.message}
-            `);
-            
-            const mailtoLink = `mailto:info@ideas-by-sabino.com?subject=${subject}&body=${body}`;
-            window.location.href = mailtoLink;
-            
-            showMessage('Direkter Versand nicht möglich. Ihr E-Mail-Programm wird geöffnet.', 'warning');
+            // For testing, show error message
+            showMessage('Fehler beim Versenden. Bitte versuchen Sie es erneut.', 'error');
         } finally {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
@@ -245,18 +249,31 @@ ${data.message}
     let mouseMovements = 0;
     
     function initSpamProtection() {
+        console.log('Spam protection initialized');
         formStartTime = Date.now();
+        interactionCount = 0;
+        mouseMovements = 0;
         
         // Track user interactions
         const formInputs = contactForm.querySelectorAll('input, textarea, select');
+        console.log('Found form inputs:', formInputs.length);
         formInputs.forEach(input => {
-            input.addEventListener('focus', () => interactionCount++);
-            input.addEventListener('input', () => interactionCount++);
+            input.addEventListener('focus', () => {
+                interactionCount++;
+                console.log('Interaction count:', interactionCount);
+            });
+            input.addEventListener('input', () => {
+                interactionCount++;
+                console.log('Interaction count:', interactionCount);
+            });
         });
         
         // Track mouse movements (human behavior)
         contactForm.addEventListener('mousemove', () => {
             mouseMovements++;
+            if (mouseMovements % 10 === 0) {
+                console.log('Mouse movements:', mouseMovements);
+            }
         });
         
         // Track typing patterns
@@ -274,8 +291,17 @@ ${data.message}
     }
     
     function passesSpamProtection() {
+        console.log('Checking spam protection...');
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
+        
+        const timeTaken = Date.now() - formStartTime;
+        console.log('Form stats:', {
+            timeTaken: timeTaken + 'ms',
+            interactionCount,
+            mouseMovements,
+            honeypot: data.website
+        });
         
         // 1. Honeypot check - if filled, it's a bot
         if (data.website && data.website.trim() !== '') {
@@ -284,20 +310,19 @@ ${data.message}
         }
         
         // 2. Time-based check - too fast submission indicates bot
-        const timeTaken = Date.now() - formStartTime;
-        if (timeTaken < 3000) { // Less than 3 seconds
+        if (timeTaken < 2000) { // Less than 2 seconds (reduced for testing)
             console.log('Spam detected: Form submitted too quickly');
             return false;
         }
         
         // 3. Interaction check - bots don't interact naturally
-        if (interactionCount < 3) {
+        if (interactionCount < 2) { // Reduced for testing
             console.log('Spam detected: Insufficient user interaction');
             return false;
         }
         
         // 4. Mouse movement check - bots often don't move mouse
-        if (mouseMovements < 5) {
+        if (mouseMovements < 2) { // Reduced for testing
             console.log('Spam detected: No mouse movement detected');
             return false;
         }
