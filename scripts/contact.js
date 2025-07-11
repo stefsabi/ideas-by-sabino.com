@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!data.name || !data.email || !data.message) {
                 console.log('❌ Validation failed: missing required fields');
                 showMessage('Bitte füllen Sie alle Pflichtfelder aus.', 'error');
+            }
             // Use our own PHP handler
             console.log('📮 Sending via PHP handler...');
             
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
         }
+        )
     }
     
     function showSuccessConfirmation(data) {
