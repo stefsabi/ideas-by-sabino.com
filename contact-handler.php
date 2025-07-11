@@ -177,45 +177,16 @@ $projectLabel = isset($projectTypes[$project]) ? $projectTypes[$project] : $proj
 $to = 'info@ideas-by-sabino.com';
 $subject = 'Neue Kontaktanfrage von ' . $name . ' - ideas by sabino';
 
-// Create email content
-$emailContent = "
-Neue Kontaktanfrage über die Website
-=====================================
+// Create HTML email content with your brand design
+$emailContent = createHtmlEmail($name, $email, $company, $projectLabel, $message, $ip, $data);
 
-Kontaktdaten:
--------------
-Name: {$name}
-E-Mail: {$email}
-Unternehmen: {$company}
-Projektart: {$projectLabel}
-
-Nachricht:
-----------
-{$message}
-
-Technische Details:
-------------------
-IP-Adresse: {$ip}
-User-Agent: {$_SERVER['HTTP_USER_AGENT']}
-Zeitstempel: " . date('d.m.Y H:i:s') . "
-Referrer: " . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direkt') . "
-
-Anti-Bot-Checks:
----------------
-Honeypot: " . (isset($data['website']) ? 'Leer (OK)' : 'Nicht gesetzt') . "
-Formular-Zeit: " . (isset($data['form_start_time']) ? (time() - intval($data['form_start_time'])) . ' Sekunden' : 'Nicht verfügbar') . "
-Interaktionen: " . (isset($data['interaction_count']) ? $data['interaction_count'] : 'Nicht verfügbar') . "
-
---
-Diese E-Mail wurde automatisch über das Kontaktformular auf ideas-by-sabino.com gesendet.
-";
-
-// Email headers
+// Email headers for HTML
 $headers = [
-    'From: noreply@ideas-by-sabino.com',
+    'From: ideas by sabino <noreply@ideas-by-sabino.com>',
     'Reply-To: ' . $email,
     'X-Mailer: PHP/' . phpversion(),
-    'Content-Type: text/plain; charset=UTF-8',
+    'MIME-Version: 1.0',
+    'Content-Type: text/html; charset=UTF-8',
     'Content-Transfer-Encoding: 8bit'
 ];
 
@@ -229,45 +200,14 @@ if ($mailSent) {
     
     // Send confirmation email to sender
     $confirmationSubject = 'Bestätigung Ihrer Kontaktanfrage - ideas by sabino';
-    $confirmationContent = "
-Liebe/r {$name},
-
-vielen Dank für Ihre Kontaktanfrage über unsere Website!
-
-Wir haben Ihre Nachricht erhalten und werden uns innerhalb von 24 Stunden bei Ihnen melden.
-
-Ihre Anfrage im Überblick:
---------------------------
-Name: {$name}
-E-Mail: {$email}
-Unternehmen: {$company}
-Projektart: {$projectLabel}
-
-Ihre Nachricht:
-{$message}
-
-Bei dringenden Anfragen erreichen Sie uns auch telefonisch unter +41 79 460 23 23.
-
-Mit freundlichen Grüßen
-Ihr Team von ideas by sabino
-
---
-ideas by sabino
-Your Business Coach
-Dättwilerstrasse 11
-CH-5405 Baden-Dättwil AG
-Schweiz
-
-E-Mail: info@ideas-by-sabino.com
-Telefon: +41 79 460 23 23
-Website: www.ideas-by-sabino.com
-";
+    $confirmationContent = createConfirmationEmail($name, $email, $company, $projectLabel, $message);
 
     $confirmationHeaders = [
-        'From: info@ideas-by-sabino.com',
+        'From: ideas by sabino <info@ideas-by-sabino.com>',
         'Reply-To: info@ideas-by-sabino.com',
         'X-Mailer: PHP/' . phpversion(),
-        'Content-Type: text/plain; charset=UTF-8',
+        'MIME-Version: 1.0',
+        'Content-Type: text/html; charset=UTF-8',
         'Content-Transfer-Encoding: 8bit'
     ];
     
@@ -292,5 +232,372 @@ Website: www.ideas-by-sabino.com
     
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Fehler beim Versenden der E-Mail']);
+}
+
+// Function to create beautiful HTML email for you
+function createHtmlEmail($name, $email, $company, $projectLabel, $message, $ip, $data) {
+    $timeStamp = date('d.m.Y H:i:s');
+    $formTime = isset($data['form_start_time']) ? (time() - intval($data['form_start_time'])) . ' Sekunden' : 'Nicht verfügbar';
+    $interactions = isset($data['interaction_count']) ? $data['interaction_count'] : 'Nicht verfügbar';
+    
+    return "
+    <!DOCTYPE html>
+    <html lang='de'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Neue Kontaktanfrage - ideas by sabino</title>
+        <style>
+            body { 
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                line-height: 1.6; 
+                color: #212529; 
+                margin: 0; 
+                padding: 20px; 
+                background-color: #f8f9fa; 
+            }
+            .container { 
+                max-width: 600px; 
+                margin: 0 auto; 
+                background: white; 
+                border-radius: 12px; 
+                overflow: hidden; 
+                box-shadow: 0 4px 20px rgba(0, 62, 31, 0.1); 
+            }
+            .header { 
+                background: linear-gradient(135deg, #003e1f 0%, #399b4a 100%); 
+                color: white; 
+                padding: 30px; 
+                text-align: center; 
+            }
+            .header h1 { 
+                margin: 0; 
+                font-size: 24px; 
+                font-weight: 600; 
+            }
+            .header p { 
+                margin: 10px 0 0 0; 
+                opacity: 0.9; 
+                font-size: 16px; 
+            }
+            .content { 
+                padding: 30px; 
+            }
+            .section { 
+                margin-bottom: 30px; 
+                padding: 20px; 
+                background: #f8f9fa; 
+                border-radius: 8px; 
+                border-left: 4px solid #9cce39; 
+            }
+            .section h2 { 
+                color: #003e1f; 
+                margin: 0 0 15px 0; 
+                font-size: 18px; 
+                font-weight: 600; 
+            }
+            .info-grid { 
+                display: grid; 
+                grid-template-columns: 120px 1fr; 
+                gap: 10px; 
+                margin-bottom: 15px; 
+            }
+            .info-label { 
+                font-weight: 600; 
+                color: #399b4a; 
+            }
+            .info-value { 
+                color: #495057; 
+            }
+            .message-box { 
+                background: white; 
+                padding: 20px; 
+                border-radius: 8px; 
+                border: 1px solid #dee2e6; 
+                font-style: italic; 
+                color: #495057; 
+                line-height: 1.6; 
+            }
+            .footer { 
+                background: #003e1f; 
+                color: white; 
+                padding: 20px 30px; 
+                text-align: center; 
+                font-size: 14px; 
+            }
+            .footer a { 
+                color: #9cce39; 
+                text-decoration: none; 
+            }
+            .tech-details { 
+                font-size: 12px; 
+                color: #6c757d; 
+                background: #f1f3f4; 
+                padding: 15px; 
+                border-radius: 6px; 
+                margin-top: 20px; 
+            }
+            .priority-badge { 
+                display: inline-block; 
+                background: #9cce39; 
+                color: #003e1f; 
+                padding: 4px 12px; 
+                border-radius: 20px; 
+                font-size: 12px; 
+                font-weight: 600; 
+                text-transform: uppercase; 
+                letter-spacing: 0.5px; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>🎯 Neue Kontaktanfrage</h1>
+                <p>ideas by sabino - Your Business Coach</p>
+                <div class='priority-badge'>Neue Anfrage</div>
+            </div>
+            
+            <div class='content'>
+                <div class='section'>
+                    <h2>👤 Kontaktdaten</h2>
+                    <div class='info-grid'>
+                        <span class='info-label'>Name:</span>
+                        <span class='info-value'><strong>{$name}</strong></span>
+                        
+                        <span class='info-label'>E-Mail:</span>
+                        <span class='info-value'><a href='mailto:{$email}' style='color: #399b4a;'>{$email}</a></span>
+                        
+                        <span class='info-label'>Unternehmen:</span>
+                        <span class='info-value'>{$company}</span>
+                        
+                        <span class='info-label'>Projektart:</span>
+                        <span class='info-value'><strong>{$projectLabel}</strong></span>
+                        
+                        <span class='info-label'>Zeitstempel:</span>
+                        <span class='info-value'>{$timeStamp}</span>
+                    </div>
+                </div>
+                
+                <div class='section'>
+                    <h2>💬 Nachricht</h2>
+                    <div class='message-box'>
+                        " . nl2br(htmlspecialchars($message)) . "
+                    </div>
+                </div>
+                
+                <div class='tech-details'>
+                    <strong>🔒 Sicherheits-Check:</strong> ✅ Alle Anti-Bot-Prüfungen bestanden<br>
+                    <strong>⏱️ Formular-Zeit:</strong> {$formTime}<br>
+                    <strong>🖱️ Interaktionen:</strong> {$interactions}<br>
+                    <strong>🌐 IP-Adresse:</strong> {$ip}<br>
+                    <strong>📱 User-Agent:</strong> " . htmlspecialchars($_SERVER['HTTP_USER_AGENT']) . "
+                </div>
+            </div>
+            
+            <div class='footer'>
+                <p><strong>ideas by sabino</strong> - Your Business Coach</p>
+                <p>Dättwilerstrasse 11, CH-5405 Baden-Dättwil AG</p>
+                <p>📧 <a href='mailto:info@ideas-by-sabino.com'>info@ideas-by-sabino.com</a> | 📞 +41 79 460 23 23</p>
+                <p style='margin-top: 15px; opacity: 0.8; font-size: 12px;'>
+                    Diese E-Mail wurde automatisch über das Kontaktformular auf 
+                    <a href='https://ideas-by-sabino.com'>ideas-by-sabino.com</a> gesendet.
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>";
+}
+
+// Function to create beautiful confirmation email for customer
+function createConfirmationEmail($name, $email, $company, $projectLabel, $message) {
+    return "
+    <!DOCTYPE html>
+    <html lang='de'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Bestätigung Ihrer Kontaktanfrage - ideas by sabino</title>
+        <style>
+            body { 
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                line-height: 1.6; 
+                color: #212529; 
+                margin: 0; 
+                padding: 20px; 
+                background-color: #f8f9fa; 
+            }
+            .container { 
+                max-width: 600px; 
+                margin: 0 auto; 
+                background: white; 
+                border-radius: 12px; 
+                overflow: hidden; 
+                box-shadow: 0 4px 20px rgba(0, 62, 31, 0.1); 
+            }
+            .header { 
+                background: linear-gradient(135deg, #399b4a 0%, #9cce39 100%); 
+                color: white; 
+                padding: 30px; 
+                text-align: center; 
+            }
+            .header h1 { 
+                margin: 0; 
+                font-size: 24px; 
+                font-weight: 600; 
+            }
+            .header p { 
+                margin: 10px 0 0 0; 
+                opacity: 0.9; 
+                font-size: 16px; 
+            }
+            .content { 
+                padding: 30px; 
+            }
+            .section { 
+                margin-bottom: 25px; 
+                padding: 20px; 
+                background: #f8f9fa; 
+                border-radius: 8px; 
+                border-left: 4px solid #399b4a; 
+            }
+            .section h2 { 
+                color: #003e1f; 
+                margin: 0 0 15px 0; 
+                font-size: 18px; 
+                font-weight: 600; 
+            }
+            .info-grid { 
+                display: grid; 
+                grid-template-columns: 120px 1fr; 
+                gap: 10px; 
+                margin-bottom: 15px; 
+            }
+            .info-label { 
+                font-weight: 600; 
+                color: #399b4a; 
+            }
+            .info-value { 
+                color: #495057; 
+            }
+            .message-preview { 
+                background: white; 
+                padding: 15px; 
+                border-radius: 6px; 
+                border: 1px solid #dee2e6; 
+                font-style: italic; 
+                color: #495057; 
+                max-height: 100px; 
+                overflow: hidden; 
+            }
+            .next-steps { 
+                background: linear-gradient(135deg, rgba(57, 155, 74, 0.1) 0%, rgba(156, 206, 57, 0.1) 100%); 
+                padding: 20px; 
+                border-radius: 8px; 
+                border: 1px solid rgba(57, 155, 74, 0.2); 
+            }
+            .next-steps ul { 
+                margin: 10px 0; 
+                padding-left: 20px; 
+            }
+            .next-steps li { 
+                margin-bottom: 8px; 
+                color: #495057; 
+            }
+            .footer { 
+                background: #003e1f; 
+                color: white; 
+                padding: 20px 30px; 
+                text-align: center; 
+                font-size: 14px; 
+            }
+            .footer a { 
+                color: #9cce39; 
+                text-decoration: none; 
+            }
+            .success-badge { 
+                display: inline-block; 
+                background: #9cce39; 
+                color: #003e1f; 
+                padding: 4px 12px; 
+                border-radius: 20px; 
+                font-size: 12px; 
+                font-weight: 600; 
+                text-transform: uppercase; 
+                letter-spacing: 0.5px; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>✅ Nachricht erhalten!</h1>
+                <p>Vielen Dank für Ihre Kontaktanfrage</p>
+                <div class='success-badge'>Bestätigung</div>
+            </div>
+            
+            <div class='content'>
+                <p style='font-size: 16px; color: #495057; margin-bottom: 25px;'>
+                    Liebe/r <strong>{$name}</strong>,<br><br>
+                    vielen Dank für Ihre Kontaktanfrage über unsere Website! 
+                    Wir haben Ihre Nachricht erhalten und werden uns innerhalb von <strong>24 Stunden</strong> bei Ihnen melden.
+                </p>
+                
+                <div class='section'>
+                    <h2>📋 Ihre Anfrage im Überblick</h2>
+                    <div class='info-grid'>
+                        <span class='info-label'>Name:</span>
+                        <span class='info-value'>{$name}</span>
+                        
+                        <span class='info-label'>E-Mail:</span>
+                        <span class='info-value'>{$email}</span>
+                        
+                        <span class='info-label'>Unternehmen:</span>
+                        <span class='info-value'>{$company}</span>
+                        
+                        <span class='info-label'>Projektart:</span>
+                        <span class='info-value'>{$projectLabel}</span>
+                    </div>
+                    
+                    <div style='margin-top: 15px;'>
+                        <strong style='color: #399b4a;'>Ihre Nachricht:</strong>
+                        <div class='message-preview'>
+                            " . nl2br(htmlspecialchars(substr($message, 0, 200))) . (strlen($message) > 200 ? '...' : '') . "
+                        </div>
+                    </div>
+                </div>
+                
+                <div class='next-steps'>
+                    <h2 style='color: #003e1f; margin: 0 0 15px 0; font-size: 18px;'>🚀 Wie geht es weiter?</h2>
+                    <ul>
+                        <li>📧 Ihre Nachricht wurde erfolgreich übermittelt</li>
+                        <li>⏰ Wir melden uns <strong>innerhalb von 24 Stunden</strong> bei Ihnen</li>
+                        <li>📞 Bei dringenden Anfragen: <strong>+41 79 460 23 23</strong></li>
+                        <li>💼 Wir besprechen Ihr Projekt und erstellen ein individuelles Angebot</li>
+                    </ul>
+                </div>
+                
+                <p style='margin-top: 25px; color: #6c757d; font-size: 14px;'>
+                    <strong>Hinweis:</strong> Falls Sie keine Antwort von uns erhalten, 
+                    prüfen Sie bitte auch Ihren Spam-Ordner oder kontaktieren Sie uns direkt.
+                </p>
+            </div>
+            
+            <div class='footer'>
+                <p><strong>ideas by sabino</strong> - Your Business Coach</p>
+                <p>Dättwilerstrasse 11, CH-5405 Baden-Dättwil AG, Schweiz</p>
+                <p>📧 <a href='mailto:info@ideas-by-sabino.com'>info@ideas-by-sabino.com</a> | 📞 +41 79 460 23 23</p>
+                <p>🌐 <a href='https://ideas-by-sabino.com'>www.ideas-by-sabino.com</a></p>
+                
+                <div style='margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);'>
+                    <p style='margin: 0; opacity: 0.8; font-size: 12px;'>
+                        Diese Bestätigung wurde automatisch generiert. 
+                        Bitte antworten Sie nicht auf diese E-Mail.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>";
 }
 ?>
