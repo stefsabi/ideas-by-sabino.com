@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Real form submission to Formspree
             console.log('📮 Sending real email via Formspree...');
             
-            const response = await fetch('https://formspree.io/f/xdkogkvo', {
+            const response = await fetch('https://formspree.io/f/mrbgkpzk', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
